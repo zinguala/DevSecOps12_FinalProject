@@ -1,8 +1,20 @@
-from flask import Flask 
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-@app.route("/")
-def hello_world():
-    print("test 1")
-    return "<p>Hello, World!</p>"
+@app.route("/", methods=['POST'])
+def recive_ping():
+    data = request.get_json()
+    req = data['body']
+    print(req)
+
+    if req == 'ping':
+        data = {'body' : 'pong'}
+        print("pong")
+        return jsonify(data)
+        #yayy
+    else:
+        print("booo")
+
+if __name__ == '__main__':
+      app.run(host='127.0.0.1', port=5005)
