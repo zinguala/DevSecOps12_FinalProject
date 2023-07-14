@@ -1,0 +1,30 @@
+sudo apt update
+sudo apt install nginx
+
+- First check the minikube ip
+$ minikube ip
+
+- Config nginx.conf file, make it transform traffic without dealing the SSL and certs
+$ sudo vim /etc/nginx/nginx.conf
+# Add the following config and save the file
+stream {
+  server {
+      listen 192.168.1.10(vm-ip):5005;
+      #TCP traffic will be forwarded to the specified server
+      proxy_pass 192.168.39.50(minikube-ip):30002;       
+  }
+}
+
+- Check Nginx config
+$ sudo nginx -t
+
+- Restart the Nginx
+$ sudo systemctl restart nginx
+
+- Open the port on the firewall:
+
+# Add port
+$ sudo ufw allow 52000
+
+# Check ufw status
+$ sudo ufw status
