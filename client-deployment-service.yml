@@ -4,7 +4,10 @@ metadata:
   name: web
 spec:
   ports:
-   - port: 5005
+  - protocol: "TCP"
+    port: 80
+    targetPort: 5005
+    nodePort: 30002
   selector:
     app: web
   type: LoadBalancer
