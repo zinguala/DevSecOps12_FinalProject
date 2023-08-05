@@ -1,8 +1,8 @@
 - name: copy and deploy cluster
   gather_facts: false
- - hosts: web
-   vars:
-     asnible_python_interpreter: /usr/bin/python3
+  hosts: web
+  vars:
+    asnible_python_interpreter: /usr/bin/python3
   
   tasks:
     - name: Create Folder
