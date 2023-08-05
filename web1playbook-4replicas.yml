@@ -1,19 +1,26 @@
 - name: Run the test playbook
   gather_facts: false
   hosts: web
+
   tasks:
+    - name: Create Folder
+      file:
+        path: /home/ansible/minkube_files
+        owner: ansible
+        group: sudo
+        mode: 0755
+        state: directory
+
     - name: copy minikube deployment config to web1
       ansible.builtin.copy:
-        src: client-deployment-4replicas.yml
-        dest: /etc/minikube_config/client-deployment-4replicas.yml
+        src: web1playbook-4replicas.yml
+        dest: /home/ansible/minikube_files
         owner: ansible
         group: sudo
 
-    - name: copy minikube service config to web1
-      ansible.builtin.copy:
-        src: client-deployment-service.yml
-        dest: /etc/minikube_config/client-deployment-service.yml
-        owner: ansible
-        group: sudo
-
-
+    - name: copy minikube deployment config to web1
+        ansible.builtin.copy:
+          src: web1playbook-4replicas.yml
+          dest: /home/ansible/minikube_files
+          owner: ansible
+          group: sudo
