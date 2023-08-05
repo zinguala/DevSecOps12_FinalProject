@@ -7,7 +7,7 @@
   tasks:
     - name: Create Folder
       file:
-        path: /home/ansible/minkube_files
+        path: /home/ansible/minkube_files/
         owner: ansible
         group: sudo
         mode: 0755
