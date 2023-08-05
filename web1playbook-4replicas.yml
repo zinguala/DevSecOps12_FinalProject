@@ -1,0 +1,19 @@
+- name: Run the test playbook
+  gather_facts: false
+  hosts: web
+  tasks:
+    - name: copy minikube deployment config to web1
+      ansible.builtin.copy:
+        src: client-deployment-4replicas.yml
+        dest: /etc/minikube_config/client-deployment-4replicas.yml
+        owner: ansible
+        group: sudo
+
+    - name: copy minikube service config to web1
+      ansible.builtin.copy:
+        src: client-deployment-service.yml
+        dest: /etc/minikube_config/client-deployment-service.yml
+        owner: ansible
+        group: sudo
+
+
