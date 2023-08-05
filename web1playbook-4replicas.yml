@@ -10,19 +10,19 @@
       path: "/home/ansible/minikube_files"
       state: directory
 
-    - name: copy minikube deployment config to web1
-      ansible.builtin.copy:
-        src: /var/lib/jenkins/workspace/pipeline for web1/client-deployment-4replicas.yml
-        dest: /home/ansible/minikube_files
-        owner: ansible
-        group: sudo
+  - name: copy minikube deployment config to web1
+    ansible.builtin.copy:
+      src: /var/lib/jenkins/workspace/pipeline for web1/client-deployment-4replicas.yml
+      dest: /home/ansible/minikube_files
+      owner: ansible
+      group: sudo
 
-    - name: copy minikube deployment config to web1
-      ansible.builtin.copy:
-        src: /var/lib/jenkins/workspace/pipeline for web1/client-deployment-service.yml
-        dest: /home/ansible/minikube_files
-        owner: ansible
-        group: sudo
+  - name: copy minikube deployment config to web1
+    ansible.builtin.copy:
+      src: /var/lib/jenkins/workspace/pipeline for web1/client-deployment-service.yml
+      dest: /home/ansible/minikube_files
+      owner: ansible
+      group: sudo
 
-    - name: apply the 4 replicas deployment
-      ansible.builtin.shell: kubectl apply -f /home/ansible/minikube_files/client-deployment-4replicas.yml
+  - name: apply the 4 replicas deployment
+    ansible.builtin.shell: kubectl apply -f /home/ansible/minikube_files/client-deployment-4replicas.yml
