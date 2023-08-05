@@ -24,3 +24,6 @@
         dest: /home/ansible/minikube_files
         owner: ansible
         group: sudo
+
+    - name: run the 4 replicas deployment
+      ansible.builtin.shell: kubctl apply -f /home/ansible/home/ansible/minikube_files/client-deployment-4replicas.yml
