@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+
+   stages {
+        stage('playbook-gitpullrepo') {
+            steps {
+                git branch: 'ansible', url: 'https://github.com/zinguala/DevSecOps12_FinalProject.git'
+            }
+        }
+        stage('copy playbook to ansible dir') {
+            steps {
+                sh 'sudo cp web1playbook-4replicas.yml /etc/ansible/playbooks/web1playbook-4replicas.yml'
+    
+            }
+        }
+        
+         stage('web config-gitpullrepo') {
+            steps {
+                git branch: 'minikube-cluster', url: 'https://github.com/zinguala/DevSecOps12_FinalProject.git'
+            }
+        }
+        
+        stage('runplaybook') {
+            steps {
+                sh 'sudo ansible-playbook /etc/ansible/playbooks/web1playbook-4replicas.yml -i /etc/ansible/inventory/inventory -vvv'
+    
+            }
+        }
+  }
+}
+  
