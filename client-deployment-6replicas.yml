@@ -1,1 +1,22 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-deployment
+  labels:
+    app: web
+spec:
+  selector:
+    matchLabels:
+      app: web
+  replicas: 6
+  template:
+    metadata:
+      name: client-pod
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: pingpong
+        image: zinguala/flask_ping_pong
+        ports:
+        - containerPort: 5005
