@@ -5,13 +5,10 @@
     asnible_python_interpreter: /usr/bin/python3
   
   tasks:
-    - name: Create Folder
-      file:
-        path: /home/ansible/minkube_files/
-        owner: ansible
-        group: sudo
-        mode: 0755
-        state: directory
+  - name: ensures minikube conf dir exists
+    file: 
+      path: "/home/ansible/minikube_files"
+      state: directory
 
     - name: copy minikube deployment config to web1
       ansible.builtin.copy:
