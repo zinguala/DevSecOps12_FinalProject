@@ -86,11 +86,11 @@ stream {
 - copy to privet key for web machine host connection- use the username and password created for ansible at the web machine:
    “ssh-copy-id -i /root/.ssh/id_rsa username@webmachine-ip-address”
 
-- if there is no etc/ansible directory : “mkdir /etc/ansible/inventory”
+- if there is no etc/ansible directory : “sudo mkdir -p /etc/ansible/inventory”
   
 - create inventory file.
 
-- create playbook folder: “mkdir /etc/ansible/playbooks
+- create playbook folder: “sudo mkdir /etc/ansible/playbooks
 
 5) add Jenkins permission so we can run sudo without password:
    
