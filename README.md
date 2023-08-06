@@ -48,6 +48,7 @@ create ubuntu Web machine that will run the minikube cluster:
 - Add the following config and save the file
 ----------------------------------------------------
 stream {
+
   server {
   
       listen 192.168.1.10(vm-ip):5005;
@@ -56,6 +57,7 @@ stream {
 	  
       proxy_pass 192.168.49.2(minikube-ip):30002(nodeport-port);  
   }
+  
 }
 -----------------------------------------------------
 - Check Nginx config: “sudo nginx -t”
