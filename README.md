@@ -35,10 +35,6 @@ create ubuntu Web machine that will run the minikube cluster:
 
 - start the minikube: “minkube start”
 
-
-
-
-
 3) Next install nginx for port forward from our web-machine-ip:5005 to our deployment’s loadbalancer nodeport:
    
 - sudo apt update
@@ -50,7 +46,7 @@ create ubuntu Web machine that will run the minikube cluster:
 - Config nginx.conf file, make it transform traffic without dealing the SSL and certs:
 - “sudo vim /etc/nginx/nginx.conf”
 - Add the following config and save the file
-
+----------------------------------------------------
 stream {
 
   server {
@@ -64,7 +60,7 @@ stream {
   }
   
 }
-
+-----------------------------------------------------
 - Check Nginx config: “sudo nginx -t”
   
 - Restart the Nginx: “sudo systemctl restart nginx”
@@ -104,7 +100,7 @@ stream {
 
 jenkins ALL=(ALL) NOPASSWD: ALL
 
-5) add ansible to Jenkins tools:
+6) add ansible to Jenkins tools:
    
 in Jenkins’s dashboard go to manage Jenkins and press tools
 
