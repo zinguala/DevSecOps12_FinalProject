@@ -109,9 +109,41 @@ ansible_ssh_private_key_file=/root/.ssh/id_rsa
 
 jenkins ALL=(ALL) NOPASSWD: ALL
 
-6) create the pipelines with cron job:
+6) create the pipelines with cron jobs:
 
-- 
+# Creating the first job of running the cluster with 4 replicas at 13:00 every day:
+
+- from the jenkins dashboard choose a new item 
+
+- enter the item name, choose pipeline, and hit "ok".
+
+- optionally can add a description
+
+- in the build triggers section choose buil periodically as shown below add the time period:  0 13 * * *
+![image](https://github.com/zinguala/DevSecOps12_FinalProject/assets/34973070/e1f6b8e5-a61a-4551-8bc2-053d9684cdc8)
+
+- now move the pipeline section and in the definition choose pipeline script from SCM
+
+- SCM: Git
+
+- Repository URL: "https://github.com/zinguala/DevSecOps12_FinalProject.git"
+
+- Branches to build: Branch Specifier (blank for 'any'): "jenkins"
+
+- Script Path:"Jenkinsfile_4_replicas"
+![image](https://github.com/zinguala/DevSecOps12_FinalProject/assets/34973070/6f7339f7-1ec6-4c5e-9145-eb6772797d89)
+
+- at the end hit save
+
+
+
+
+
+
+
+
+
+
 
    
 
