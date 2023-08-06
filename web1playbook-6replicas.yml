@@ -27,5 +27,5 @@
   - name: apply the 6 replicas deployment
     ansible.builtin.shell: kubectl apply -f /home/ansible/minikube_files/client-deployment-6replicas.yml
     
-  - name: apply the 6 replicas deployment
+  - name: apply the 6 replicas service
     ansible.builtin.shell: kubectl apply -f /home/ansible/minikube_files/client-deployment-service.yml
