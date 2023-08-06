@@ -84,8 +84,7 @@ stream {
 - create private key for secured ssh connection: “sudo ssh-keygen”
 
 - copy to privet key for web machine host connection- use the username and password created for ansible at the web machine:
-  
-- “ssh-copy-id -i /root/.ssh/id_rsa username@webmachine-ip-address”
+   “ssh-copy-id -i /root/.ssh/id_rsa username@webmachine-ip-address”
 
 - if there is no etc/ansible directory : “mkdir /etc/ansible/inventory”
   
