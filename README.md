@@ -67,7 +67,7 @@ stream {
 -Check ufw status: “sudo ufw status”
 
 
-3)	Create ubuntu Jenkins + ansible machine:
+3) Create ubuntu Jenkins + ansible machine:
    
 -Install Jenkins:   https://www.jenkins.io/doc/book/installing/linux/
 
@@ -87,17 +87,17 @@ stream {
 
 -create playbook folder: “mkdir /etc/ansible/playbooks
 
-4)	add Jenkins permission so we can run sudo without password:
+4) add Jenkins permission so we can run sudo without password:
    
 - sudo su
   
 - visudo
-- 
+  
 then add to the file the line
 
 jenkins ALL=(ALL) NOPASSWD: ALL
 
-5)	add ansible to Jenkins tools:
+5) add ansible to Jenkins tools:
    
 in Jenkins’s dashboard go to manage Jenkins and press tools
 
