@@ -50,18 +50,13 @@ USING ANSIBILE WE WILL BUILD A CRON JOB IN JENKINS TO ADD 2 REPLICAS AT 8:‎00 
 - “sudo nano /etc/nginx/nginx.conf”
 - Add the following config and save the file
 ----------------------------------------------------
-stream {
-
-  server {
-  
-      listen (vm-ip):5005;
-	  
-      #TCP traffic will be forwarded to the specified server
-	  
-      proxy_pass 192.168.49.2(minikube-ip):30002(nodeport-port of the service-deployment);  
-  }
-  
-}
+stream {  
+  server {  
+      listen (vm-ip):5005;  
+      #TCP traffic will be forwarded to the specified server    
+      proxy_pass 192.168.49.2(minikube-ip):30002(nodeport-port of the service-deployment);    
+  }  
+}  
 -----------------------------------------------------
 - Check Nginx config: “sudo nginx -t”
   
@@ -90,8 +85,15 @@ stream {
    “ssh-copy-id -i /root/.ssh/id_rsa username@webmachine-ip-address”
 
 - create inventory file called "inventory" in /etc/ansible/inventory directory : “sudo mkdir -p /etc/ansible/inventory”
+  
+- "nano /etc/ansible/inventory/inventory":
+--------------------------------------------------
+[web]  
+hostname ansible_host=vm-ip ansible_user=username
 
-
+[vars:all]    
+ansible_ssh_private_key_file=/root/.ssh/id_rsa
+---------------------------------------------------
 5) add Jenkins permission so we can run sudo without password:
    
 - sudo su
