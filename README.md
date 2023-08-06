@@ -49,7 +49,7 @@ USING ANSIBILE WE WILL BUILD A CRON JOB IN JENKINS TO ADD 2 REPLICAS AT 8:‎00 
 - Config nginx.conf file, make it transform traffic without dealing the SSL and certs:
 - “sudo nano /etc/nginx/nginx.conf”
 - Add the following config and save the file
-----------------------------------------------------
+
 stream {  
   server {  
       listen (vm-ip):5005;  
@@ -57,7 +57,7 @@ stream {
       proxy_pass 192.168.49.2(minikube-ip):30002(nodeport-port of the service-deployment);    
   }  
 }  
------------------------------------------------------
+
 - Check Nginx config: “sudo nginx -t”
   
 - Restart the Nginx: “sudo systemctl restart nginx”
