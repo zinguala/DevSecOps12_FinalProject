@@ -5,7 +5,8 @@ THE BODY OF THIS REQUEST IS A JSON WITH A CONTENT PING THE FLAK APP SHROUD RETUR
 WE WILL BUILD A CLUSTER IN MINIKUBE TO RUN 4 INSTANCES OF THIS CONTAINER
  THE INSTANCE WILL BE A DEPLOYMENT WITH A 4 REPLICAS
 USING ANSIBILE WE WILL BUILD A CRON JOB IN JENKINS TO ADD 2 REPLICAS AT 8:‎00 AND DELETE 2 REPLICAS AT 13:00
-here are the instructions to get it all working:
+
+# here are the instructions to get it all working:
 
 # create ubuntu Web machine that will run the minikube cluster:
 
