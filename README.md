@@ -6,17 +6,17 @@ WE WILL BUILD A CLUSTER IN MINIKUBE TO RUN 4 INSTANCES OF THIS CONTAINER
  THE INSTANCE WILL BE A DEPLOYMENT WITH A 4 REPLICAS
 USING ANSIBILE WE WILL BUILD A CRON JOB IN JENKINS TO ADD 2 REPLICAS AT 8:‎00 AND DELETE 2 REPLICAS AT 13:00
 here are the instructions to get it all working:
-1)	First create ubuntu Web machine that will run the minikube cluster:
+1) First create ubuntu Web machine that will run the minikube cluster:
    
--install open-ssh-server: “sudo apt install openssh-server”
+- install open-ssh-server: “sudo apt install openssh-server”
 
--install docker: “sudo apt install docker.io”
+- install docker: “sudo apt install docker.io”
 
--to run docker without sudo: “sudo usermod -aG docker $USER && newgrp docker”
+- to run docker without sudo: “sudo usermod -aG docker $USER && newgrp docker”
 
--install minikube: https://minikube.sigs.k8s.io/docs/start/
+- install minikube: https://minikube.sigs.k8s.io/docs/start/
 
--install kubectl: “sudo snap install kubectl --classic”
+- install kubectl: “sudo snap install kubectl --classic”
 
 -start the minikube: “minkube start”
 
@@ -28,21 +28,19 @@ now we will add the user for ansible ssh connection:
   
 -add username to sudoers group: “sudo usermod -aG sudo username”
 
--check group of username : 'groups username' 
+- check group of username : 'groups username' 
 
-2)  Next install nginx for port forward from our web-machine-ip:5005 to our deployment’s loadbalancer nodeport:
+2) Next install nginx for port forward from our web-machine-ip:5005 to our deployment’s loadbalancer nodeport:
    
--sudo apt update
+- sudo apt update
 
--sudo apt install nginx
+- sudo apt install nginx
 
 - First check the minikube ip: “minikube ip”
 
 - Config nginx.conf file, make it transform traffic without dealing the SSL and certs:
-  
--“sudo vim /etc/nginx/nginx.conf”
-
--Add the following config and save the file
+- “sudo vim /etc/nginx/nginx.conf”
+- Add the following config and save the file
 
 stream {
 
@@ -69,31 +67,31 @@ stream {
 
 3) Create ubuntu Jenkins + ansible machine:
    
--Install Jenkins:   https://www.jenkins.io/doc/book/installing/linux/
+- Install Jenkins:   https://www.jenkins.io/doc/book/installing/linux/
 
--install ansible: https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
+- install ansible: https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
 
--install open ssh client: “sudo apt install openssh-client”
+- install open ssh client: “sudo apt install openssh-client”
 
--create private key for secured ssh connection: “sudo ssh-keygen”
+- create private key for secured ssh connection: “sudo ssh-keygen”
 
--copy to privet key for web machine host connection- use the username and password created for ansible at the web machine:
+- copy to privet key for web machine host connection- use the username and password created for ansible at the web machine:
   
-“ssh-copy-id -i /root/.ssh/id_rsa username@webmachine-ip-address”
+- “ssh-copy-id -i /root/.ssh/id_rsa username@webmachine-ip-address”
 
--if there is no etc/ansible directory : “mkdir /etc/ansible/inventory”
+- if there is no etc/ansible directory : “mkdir /etc/ansible/inventory”
   
--create inventory file.
+- create inventory file.
 
--create playbook folder: “mkdir /etc/ansible/playbooks
+- create playbook folder: “mkdir /etc/ansible/playbooks
 
 4) add Jenkins permission so we can run sudo without password:
    
--sudo su
+- sudo su
   
--visudo
+- visudo
   
-then add to the file the line
+- then add this line to the file:
 
 jenkins ALL=(ALL) NOPASSWD: ALL
 
