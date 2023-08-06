@@ -44,7 +44,7 @@ create ubuntu Web machine that will run the minikube cluster:
 - First check the minikube ip: “minikube ip”
 
 - Config nginx.conf file, make it transform traffic without dealing the SSL and certs:
-- “sudo vim /etc/nginx/nginx.conf”
+- “sudo nano /etc/nginx/nginx.conf”
 - Add the following config and save the file
 ----------------------------------------------------
 stream {
