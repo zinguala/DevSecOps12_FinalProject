@@ -7,6 +7,18 @@ pipeline {
                 git branch: 'ansible', url: 'https://github.com/zinguala/DevSecOps12_FinalProject.git'
             }
         }
+
+    stage ('Check for existence of ansible/playbooks dir') {
+       
+    steps {
+        script {
+            if (!fileExists('/etc/ansible/playbooks')) {
+                mkdir /etc/ansible/playbooks
+            }
+            }
+        }
+     }
+
         stage('copy playbook to ansible dir') {
             steps {
                 sh 'sudo cp web1playbook-4replicas.yml /etc/ansible/playbooks/web1playbook-4replicas.yml'
