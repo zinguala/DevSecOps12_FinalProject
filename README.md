@@ -77,11 +77,11 @@ stream {
 
 -create private key for secured ssh connection: “sudo ssh-keygen”
 
-- copy to privet key for web machine host connection- use the username and password created for ansible at the web machine:
+-copy to privet key for web machine host connection- use the username and password created for ansible at the web machine:
   
 “ssh-copy-id -i /root/.ssh/id_rsa username@webmachine-ip-address”
 
-- if there is no etc/ansible directory : “mkdir /etc/ansible/inventory”
+-if there is no etc/ansible directory : “mkdir /etc/ansible/inventory”
   
 -create inventory file.
 
@@ -89,9 +89,9 @@ stream {
 
 4) add Jenkins permission so we can run sudo without password:
    
-- sudo su
+-sudo su
   
-- visudo
+-visudo
   
 then add to the file the line
 
