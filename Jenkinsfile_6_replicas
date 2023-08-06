@@ -1,0 +1,31 @@
+- name: copy and deploy cluster
+  gather_facts: false
+  hosts: web
+  vars:
+    asnible_python_interpreter: /usr/bin/python3
+  
+  tasks:
+  - name: ensures minikube conf dir exists
+    file: 
+      path: "/home/ansible/minikube_files"
+      state: directory
+
+  - name: copy minikube deployment config to web1
+    ansible.builtin.copy:
+      src: /etc/minikube_configs/client-deployment-6replicas.yml
+      dest: /home/ansible/minikube_files
+      owner: ansible
+      group: sudo
+
+  - name: copy minikube deployment config to web1
+    ansible.builtin.copy:
+      src: /etc/minikube_configs/client-deployment-service.yml
+      dest: /home/ansible/minikube_files
+      owner: ansible
+      group: sudo
+
+  - name: apply the 6 replicas deployment
+    ansible.builtin.shell: kubectl apply -f /home/ansible/minikube_files/client-deployment-6replicas.yml
+    
+  - name: apply the 6 replicas deployment
+    ansible.builtin.shell: kubectl apply -f /home/ansible/minikube_files/client-deployment-service.yml
