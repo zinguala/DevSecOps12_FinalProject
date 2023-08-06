@@ -20,17 +20,17 @@ here are the instructions to get it all working:
 
 - start the minikube: “minkube start”
 
-now we will add the user for ansible ssh connection:
+2) now we will add the user for ansible ssh connection:
 
 - “sudo adduser username”
   
 - sudo visudo : add the user under  # User privilege specification – “username ALL=(ALL:ALL) ALL”
   
--add username to sudoers group: “sudo usermod -aG sudo username”
+- add username to sudoers group: “sudo usermod -aG sudo username”
 
 - check group of username : 'groups username' 
 
-2) Next install nginx for port forward from our web-machine-ip:5005 to our deployment’s loadbalancer nodeport:
+3) Next install nginx for port forward from our web-machine-ip:5005 to our deployment’s loadbalancer nodeport:
    
 - sudo apt update
 
@@ -65,7 +65,7 @@ stream {
 -Check ufw status: “sudo ufw status”
 
 
-3) Create ubuntu Jenkins + ansible machine:
+4) Create ubuntu Jenkins + ansible machine:
    
 - Install Jenkins:   https://www.jenkins.io/doc/book/installing/linux/
 
@@ -85,7 +85,7 @@ stream {
 
 - create playbook folder: “mkdir /etc/ansible/playbooks
 
-4) add Jenkins permission so we can run sudo without password:
+5) add Jenkins permission so we can run sudo without password:
    
 - sudo su
   
