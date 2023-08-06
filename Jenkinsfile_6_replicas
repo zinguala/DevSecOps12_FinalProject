@@ -21,7 +21,7 @@ pipeline {
 
         stage('copy playbook to ansible dir') {
             steps {
-                sh 'sudo cp web1playbook-4replicas.yml /etc/ansible/playbooks/web1playbook-4replicas.yml'
+                sh 'sudo cp web1playbook-6replicas.yml /etc/ansible/playbooks/web1playbook-4replicas.yml'
     
             }
         }
