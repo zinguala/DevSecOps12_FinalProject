@@ -20,6 +20,8 @@ create ubuntu Web machine that will run the minikube cluster:
 - check group of username : 'groups username' 
 
 2) installation of the minikube cluster:
+
+- sign in to the ansible user
    
 - install open-ssh-server: “sudo apt install openssh-server”
 
