@@ -31,7 +31,25 @@ pipeline {
                 git branch: 'minikube-cluster', url: 'https://github.com/zinguala/DevSecOps12_FinalProject.git'
             }
         }
-        
+
+         stage ('Check for existence of etc/minikube_configs dir') {
+       
+    steps {
+        script {
+            if (!fileExists('/etc/minikube_configs')) {
+               sh 'sudo mkdir /etc/ansible/minikube_configs'
+            }
+            }
+        }
+     }
+
+        stage('copy minikube config files etc') {
+            steps {
+                sh '''sudo cp client-deployment-4replicas.yml /etc/minikube_configs/web1playbook-4replicas.yml
+                     sudo cp client-deployment-service.yml /etc/minikube_configs/client-deployment-service.yml
+                '''  
+            }
+        }
         stage('runplaybook') {
             steps {
                 sh 'sudo ansible-playbook /etc/ansible/playbooks/web1playbook-4replicas.yml -i /etc/ansible/inventory/inventory -vvv'
