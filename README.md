@@ -7,7 +7,7 @@ WE WILL BUILD A CLUSTER IN MINIKUBE TO RUN 4 INSTANCES OF THIS CONTAINER
 USING ANSIBILE WE WILL BUILD A CRON JOB IN JENKINS TO ADD 2 REPLICAS AT 8:‎00 AND DELETE 2 REPLICAS AT 13:00
 here are the instructions to get it all working:
 
-create ubuntu Web machine that will run the minikube cluster:
+# create ubuntu Web machine that will run the minikube cluster:
 
 1) first we will add the user for ansible ssh connection:
 
@@ -18,6 +18,7 @@ create ubuntu Web machine that will run the minikube cluster:
 - add username to sudoers group: “sudo usermod -aG sudo username”
 
 - check group of username : 'groups username' 
+
 
 2) installation of the minikube cluster:
 
@@ -34,6 +35,7 @@ create ubuntu Web machine that will run the minikube cluster:
 - install kubectl: “sudo snap install kubectl --classic”
 
 - start the minikube: “minkube start”
+
 
 3) Next install nginx for port forward from our web-machine-ip:5005 to our deployment’s loadbalancer nodeport:
    
@@ -69,7 +71,9 @@ stream {
 - Check ufw status: “sudo ufw status”
 
 
-4) Create ubuntu Jenkins + ansible machine:
+# Create ubuntu Jenkins + ansible machine:
+
+4) install and config ansible and jenkins:
    
 - Install Jenkins:   https://www.jenkins.io/doc/book/installing/linux/
 
