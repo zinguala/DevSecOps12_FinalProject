@@ -56,7 +56,7 @@ pipeline {
         }
         stage('runplaybook') {
             steps {
-                sh 'sudo ansible-playbook /etc/ansible/playbooks/web1playbook-4replicas.yml -i /etc/ansible/inventory/inventory -vvv'
+                sh 'sudo ansible-playbook /etc/ansible/playbooks/web1playbook-6replicas.yml -i /etc/ansible/inventory/inventory -vvv'
     
             }
         }
