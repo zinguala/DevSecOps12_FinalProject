@@ -45,7 +45,7 @@ pipeline {
 
         stage('copy minikube config files etc') {
             steps {
-                sh '''sudo cp client-deployment-4replicas.yml /etc/minikube_configs/web1playbook-4replicas.yml
+                sh '''sudo cp client-deployment-4replicas.yml /etc/minikube_configs/client-deployment-4replicas.yml
                      sudo cp client-deployment-service.yml /etc/minikube_configs/client-deployment-service.yml
                 '''  
             }
