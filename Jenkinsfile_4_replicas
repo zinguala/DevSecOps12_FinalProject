@@ -13,7 +13,7 @@ pipeline {
     steps {
         script {
             if (!fileExists('/etc/ansible/playbooks')) {
-                mkdir /etc/ansible/playbooks
+               sh 'sudo mkdir /etc/ansible/playbooks'
             }
             }
         }
