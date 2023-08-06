@@ -18,7 +18,7 @@ here are the instructions to get it all working:
 
 - install kubectl: “sudo snap install kubectl --classic”
 
--start the minikube: “minkube start”
+- start the minikube: “minkube start”
 
 now we will add the user for ansible ssh connection:
 
