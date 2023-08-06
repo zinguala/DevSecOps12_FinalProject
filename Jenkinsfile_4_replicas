@@ -43,11 +43,15 @@ pipeline {
         }
      }
 
-        stage('copy minikube config files etc') {
+        stage('copy minikube config deployment file to etc') {
             steps {
-                sh '''sudo cp client-deployment-4replicas.yml /etc/minikube_configs/client-deployment-4replicas.yml
-                      client-deployment-service.yml /etc/minikube_configs/client-deployment-service.yml
-                '''  
+                sh 'sudo cp client-deployment-4replicas.yml /etc/minikube_configs/client-deployment-4replicas.yml'
+                     
+            }
+        }
+        stage('copy minikube config service file to etc') {
+            steps {
+                sh 'sudo cp client-deployment-service.yml /etc/minikube_configs/client-deployment-service.yml' 
             }
         }
         stage('runplaybook') {
