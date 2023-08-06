@@ -1,31 +1,64 @@
-- name: copy and deploy cluster
-  gather_facts: false
-  hosts: web
-  vars:
-    asnible_python_interpreter: /usr/bin/python3
-  
-  tasks:
-  - name: ensures minikube conf dir exists
-    file: 
-      path: "/home/ansible/minikube_files"
-      state: directory
+pipeline {
+    agent any
 
-  - name: copy minikube deployment config to web1
-    ansible.builtin.copy:
-      src: /etc/minikube_configs/client-deployment-6replicas.yml
-      dest: /home/ansible/minikube_files
-      owner: ansible
-      group: sudo
+   stages {
+        stage('playbook-gitpullrepo') {
+            steps {
+                git branch: 'ansible', url: 'https://github.com/zinguala/DevSecOps12_FinalProject.git'
+            }
+        }
 
-  - name: copy minikube deployment config to web1
-    ansible.builtin.copy:
-      src: /etc/minikube_configs/client-deployment-service.yml
-      dest: /home/ansible/minikube_files
-      owner: ansible
-      group: sudo
+    stage ('Check for existence of ansible/playbooks dir') {
+       
+    steps {
+        script {
+            if (!fileExists('/etc/ansible/playbooks')) {
+               sh 'sudo mkdir /etc/ansible/playbooks'
+            }
+            }
+        }
+     }
 
-  - name: apply the 6 replicas deployment
-    ansible.builtin.shell: kubectl apply -f /home/ansible/minikube_files/client-deployment-6replicas.yml
+        stage('copy playbook to ansible dir') {
+            steps {
+                sh 'sudo cp web1playbook-4replicas.yml /etc/ansible/playbooks/web1playbook-4replicas.yml'
     
-  - name: apply the 6 replicas deployment
-    ansible.builtin.shell: kubectl apply -f /home/ansible/minikube_files/client-deployment-service.yml
+            }
+        }
+        
+         stage('web config-gitpullrepo') {
+            steps {
+                git branch: 'minikube-cluster', url: 'https://github.com/zinguala/DevSecOps12_FinalProject.git'
+            }
+        }
+
+         stage ('Check for existence of etc/minikube_configs dir') {
+       
+    steps {
+        script {
+            if (!fileExists('/etc/minikube_configs')) {
+               sh 'sudo mkdir /etc/minikube_configs'
+            }
+            }
+        }
+     }
+
+        stage('copy minikube config deployment file to etc') {
+            steps {
+                sh 'sudo cp client-deployment-6replicas.yml /etc/minikube_configs/client-deployment-4replicas.yml'
+                     
+            }
+        }
+        stage('copy minikube config service file to etc') {
+            steps {
+                sh 'sudo cp client-deployment-service.yml /etc/minikube_configs/client-deployment-service.yml' 
+            }
+        }
+        stage('runplaybook') {
+            steps {
+                sh 'sudo ansible-playbook /etc/ansible/playbooks/web1playbook-4replicas.yml -i /etc/ansible/inventory/inventory -vvv'
+    
+            }
+        }
+  }
+}
