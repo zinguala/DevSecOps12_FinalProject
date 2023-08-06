@@ -6,7 +6,20 @@ WE WILL BUILD A CLUSTER IN MINIKUBE TO RUN 4 INSTANCES OF THIS CONTAINER
  THE INSTANCE WILL BE A DEPLOYMENT WITH A 4 REPLICAS
 USING ANSIBILE WE WILL BUILD A CRON JOB IN JENKINS TO ADD 2 REPLICAS AT 8:‎00 AND DELETE 2 REPLICAS AT 13:00
 here are the instructions to get it all working:
-1) First create ubuntu Web machine that will run the minikube cluster:
+
+create ubuntu Web machine that will run the minikube cluster:
+
+1) first we will add the user for ansible ssh connection:
+
+- “sudo adduser username”
+  
+- sudo visudo : add the user under  # User privilege specification – “username ALL=(ALL:ALL) ALL”
+  
+- add username to sudoers group: “sudo usermod -aG sudo username”
+
+- check group of username : 'groups username' 
+
+2) installation of the minikube cluster:
    
 - install open-ssh-server: “sudo apt install openssh-server”
 
@@ -20,15 +33,9 @@ here are the instructions to get it all working:
 
 - start the minikube: “minkube start”
 
-2) now we will add the user for ansible ssh connection:
 
-- “sudo adduser username”
-  
-- sudo visudo : add the user under  # User privilege specification – “username ALL=(ALL:ALL) ALL”
-  
-- add username to sudoers group: “sudo usermod -aG sudo username”
 
-- check group of username : 'groups username' 
+
 
 3) Next install nginx for port forward from our web-machine-ip:5005 to our deployment’s loadbalancer nodeport:
    
