@@ -49,6 +49,7 @@ USING ANSIBILE WE WILL BUILD A CRON JOB IN JENKINS TO ADD 2 REPLICAS AT 8:‎00 
 - Config nginx.conf file, make it transform traffic without dealing the SSL and certs:
 - “sudo nano /etc/nginx/nginx.conf”
 - Add the following config and save the file  
+--------------------------------------------------  
 
 stream {  
   server {  
@@ -58,6 +59,7 @@ stream {
   }  
 }  
 
+----------------------------------------------------  
 
 - Check Nginx config: “sudo nginx -t”
   
@@ -94,7 +96,9 @@ hostname ansible_host=vm-ip ansible_user=username
 
 [vars:all]    
 ansible_ssh_private_key_file=/root/.ssh/id_rsa
----------------------------------------------------
+
+--------------------------------------------------
+
 5) add Jenkins permission so we can run sudo without password:
    
 - sudo su
