@@ -66,7 +66,7 @@ stream {
   
 - Open the port on the firewall: “sudo ufw allow 5005”
   
--Check ufw status: “sudo ufw status”
+- Check ufw status: “sudo ufw status”
 
 
 4) Create ubuntu Jenkins + ansible machine:
