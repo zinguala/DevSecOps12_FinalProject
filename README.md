@@ -77,6 +77,8 @@ stream {
    
 - Install Jenkins:   https://www.jenkins.io/doc/book/installing/linux/
 
+- Install GIT: "sudo apt install git" 
+
 - install ansible: https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
 
 - install open ssh client: “sudo apt install openssh-client”
