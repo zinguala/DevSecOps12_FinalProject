@@ -101,7 +101,9 @@ stream {
 
 jenkins ALL=(ALL) NOPASSWD: ALL
 
-6) create the pipelines: 
+6) create the pipelines with cron job:
+
+- 
 
    
 
