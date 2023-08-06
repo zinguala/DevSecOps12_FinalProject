@@ -53,11 +53,11 @@ stream {
 
   server {
   
-      listen 192.168.1.10(vm-ip):5005;
+      listen (vm-ip):5005;
 	  
       #TCP traffic will be forwarded to the specified server
 	  
-      proxy_pass 192.168.49.2(minikube-ip):30002(nodeport-port);  
+      proxy_pass 192.168.49.2(minikube-ip):30002(nodeport-port of the service-deployment);  
   }
   
 }
@@ -88,11 +88,8 @@ stream {
 - copy to privet key for web machine host connection- use the username and password created for ansible at the web machine:
    “ssh-copy-id -i /root/.ssh/id_rsa username@webmachine-ip-address”
 
-- if there is no etc/ansible directory : “sudo mkdir -p /etc/ansible/inventory”
-  
-- create inventory file.
+- create inventory file called "inventory" in /etc/ansible/inventory directory : “sudo mkdir -p /etc/ansible/inventory”
 
-- create playbook folder: “sudo mkdir /etc/ansible/playbooks
 
 5) add Jenkins permission so we can run sudo without password:
    
@@ -104,17 +101,10 @@ stream {
 
 jenkins ALL=(ALL) NOPASSWD: ALL
 
-6) add ansible to Jenkins tools:
+6) create the pipelines: 
+
    
-in Jenkins’s dashboard go to manage Jenkins and press tools
 
-in the ansible section need to add the installed ansible 
-
-choose name 
-
-and add the path to ansible:  /usr/bin
-
-(you can check were is ansible installed with the command “which ansible”
 
 
 
