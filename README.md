@@ -120,6 +120,7 @@ jenkins ALL=(ALL) NOPASSWD: ALL
 - optionally can add a description
 
 - in the build triggers section choose buil periodically as shown below add the time period:  0 13 * * *
+  
 ![image](https://github.com/zinguala/DevSecOps12_FinalProject/assets/34973070/e1f6b8e5-a61a-4551-8bc2-053d9684cdc8)
 
 - now move the pipeline section and in the definition choose pipeline script from SCM
@@ -135,11 +136,29 @@ jenkins ALL=(ALL) NOPASSWD: ALL
 
 - at the end hit save
 
+# Creating the second job of running the cluster with 6 replicas at 8:00 every day:
 
+- from the jenkins dashboard choose a new item 
 
+- enter the item name, choose pipeline, and hit "ok".
 
+- optionally can add a description
 
+- in the build triggers section choose buil periodically as shown below add the time period:  0 8 * * *
 
+![image](https://github.com/zinguala/DevSecOps12_FinalProject/assets/34973070/1230c1fb-623e-4b16-8b5b-64991461616e)
+
+- now move the pipeline section and in the definition choose pipeline script from SCM
+
+- SCM: Git
+
+- Repository URL: "https://github.com/zinguala/DevSecOps12_FinalProject.git"
+
+- Branches to build: Branch Specifier (blank for 'any'): "jenkins"
+
+- Script Path:"Jenkinsfile_6_replicas"
+- 
+![image](https://github.com/zinguala/DevSecOps12_FinalProject/assets/34973070/214e6542-ac7c-438f-a128-76c21164e039)
 
 
 
