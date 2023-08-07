@@ -157,10 +157,12 @@ jenkins ALL=(ALL) NOPASSWD: ALL
 - Branches to build: Branch Specifier (blank for 'any'): "jenkins"
 
 - Script Path:"Jenkinsfile_6_replicas"
+  
+![image](https://github.com/zinguala/DevSecOps12_FinalProject/assets/34973070/be2eb371-cb88-4967-83c7-6c032f28e7a5)
 
-  ![image](https://github.com/zinguala/DevSecOps12_FinalProject/assets/34973070/361af810-905c-4785-b555-09884a6d553a)
+# installtion finished!!! now its time to test the cluster:
 
-
+- create vm and install postman: 
 
 
 
