@@ -162,9 +162,9 @@ jenkins ALL=(ALL) NOPASSWD: ALL
 
 - at the end hit save
 
-
-
 # installtion finished!!! now its time to test the cluster:
+
+- fisrt run one of the jenkins jobs: click on build now and wait for the build to finish.
 
 - create vm and install postman: 
 
