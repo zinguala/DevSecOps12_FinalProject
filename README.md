@@ -14,7 +14,8 @@ USING ANSIBILE WE WILL BUILD A CRON JOB IN JENKINS TO ADD 2 REPLICAS AT 8:‎00 
 
 - “sudo adduser username”
   
-- sudo visudo : add the user under  # User privilege specification – “username ALL=(ALL:ALL) ALL”
+- sudo visudo : add the user under  # User privilege specification:
+ “username ALL=(ALL:ALL) ALL”
   
 - add username to sudoers group: “sudo usermod -aG sudo username”
 
