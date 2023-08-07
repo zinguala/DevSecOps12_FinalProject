@@ -2,7 +2,7 @@ pipeline {
     agent any
 
    stages {
-        stage('gitpullrepo branch ansible') {
+        stage('clone repo branch ansible') {
             steps {
                 git branch: 'ansible', url: 'https://github.com/zinguala/DevSecOps12_FinalProject.git'
             }
@@ -26,7 +26,7 @@ pipeline {
             }
         }
         
-         stage('gitpullrepo branch minikube-cluster' ) {
+         stage('clone repo branch minikube-cluster' ) {
             steps {
                 git branch: 'minikube-cluster', url: 'https://github.com/zinguala/DevSecOps12_FinalProject.git'
             }
@@ -54,7 +54,7 @@ pipeline {
                 sh 'sudo cp client-deployment-service.yml /etc/minikube_configs/client-deployment-service.yml' 
             }
         }
-        stage('playbook copy minikube configs to web and apply them') {
+        stage('playbook copy minikube configs to web host and apply them') {
             steps {
                 sh 'sudo ansible-playbook /etc/ansible/playbooks/web1playbook-4replicas.yml -i /etc/ansible/inventory/inventory'
     
