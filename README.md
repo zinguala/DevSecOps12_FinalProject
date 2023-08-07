@@ -166,9 +166,23 @@ jenkins ALL=(ALL) NOPASSWD: ALL
 
 - fisrt run one of the jenkins jobs: click on build now and wait for the build to finish.
 
-- create vm and install postman: 
+- create vm and install postman: "sudo snap install postman"
 
+- open postman: "postman"
 
+- create get request to web host (runs the minikube cluster) ip:5005  
+the body of the request is raw JSON: 
+{  
+"body" : "ping"  
+}  
+
+the response should be:
+{  
+"body" : "pong"  
+}  
+
+like this example:  
+![image](https://github.com/zinguala/DevSecOps12_FinalProject/assets/34973070/fdaa3083-7be7-43f8-94a7-77f9c6f86dc6)
 
    
 
