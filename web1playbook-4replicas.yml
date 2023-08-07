@@ -34,9 +34,6 @@
     rescue:
       - name: restart minikube
         ansible.builtin.shell: minikube start
-
-      - name: wait for minikube to start
-        ansible.builtin.shell: sleep 30s
         
       - name: apply the 4 replicas deployment
         ansible.builtin.shell: kubectl apply -f /home/ansible/minikube_files/client-deployment-4replicas.yml
