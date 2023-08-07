@@ -160,6 +160,10 @@ jenkins ALL=(ALL) NOPASSWD: ALL
   
 ![image](https://github.com/zinguala/DevSecOps12_FinalProject/assets/34973070/be2eb371-cb88-4967-83c7-6c032f28e7a5)
 
+- at the end hit save
+
+
+
 # installtion finished!!! now its time to test the cluster:
 
 - create vm and install postman: 
