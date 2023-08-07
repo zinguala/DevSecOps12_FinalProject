@@ -56,7 +56,7 @@ stream {
   server {  
       listen 192.168.1.10(vm-ip):5005;  
       #TCP traffic will be forwarded to the specified server  
-      proxy_pass 192.168.39.50(minikube-ip):30002;         
+      proxy_pass 192.168.49.2(minikube-ip):30002;         
   }  
 }  
 
