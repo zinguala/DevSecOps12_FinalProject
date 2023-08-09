@@ -12,15 +12,15 @@
 
   - name: copy minikube deployment config to web1
     ansible.builtin.copy:
-      src: /home/{{ansible_user}}/minikube_configs/client-deployment-4replicas.yml
-      dest: /etc/minikube_configs
+      src: /etc/minikube_configs/client-deployment-4replicas.yml
+      dest: /home/{{ansible_user}}/minikube_configs
       owner: {{ansible_user}}
       group: sudo
 
   - name: copy minikube deployment config to web1
     ansible.builtin.copy:
       src: /etc/minikube_configs/client-deployment-service.yml
-      dest: /home/{{ansible_user}}
+      dest: /home/{{ansible_user}}/minikube_configs
       owner: {{ansible_user}}
       group: sudo
 
