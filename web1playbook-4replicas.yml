@@ -2,7 +2,7 @@
   become: True
   become_method: su
   become_user: root
-  become_ask_pass: False
+  ask_become_pass: False
   become_exe: "sudo su -"
   gather_facts: false
   hosts: web
