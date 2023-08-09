@@ -1,5 +1,6 @@
 - name: copy and deploy cluster
   become: true
+  become_method: su
   gather_facts: false
   hosts: web
   vars:
@@ -10,7 +11,6 @@
     file: 
       path: "/etc/minikube_configs"
       state: directory
-      mode: '0755'
 
   - name: copy minikube deployment config to web1
     ansible.builtin.copy:
