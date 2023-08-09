@@ -1,5 +1,4 @@
 - name: copy and deploy cluster
-  become: True
   gather_facts: false
   hosts: web
   vars:
