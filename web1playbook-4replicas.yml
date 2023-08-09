@@ -8,12 +8,12 @@
   tasks:
   - name: ensures minikube conf dir exists
     file: 
-      path: "/etc/minikube_configs"
+      path: "/home/{{ansible_user}}/minikube_configs"
       state: directory
 
   - name: copy minikube deployment config to web1
     ansible.builtin.copy:
-      src: /etc/minikube_configs/client-deployment-4replicas.yml
+      src: /home/{{ansible_user}}/minikube_configs/client-deployment-4replicas.yml
       dest: /etc/minikube_configs
       owner: root
       group: sudo
