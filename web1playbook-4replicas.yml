@@ -1,6 +1,9 @@
 - name: copy and deploy cluster
-  become: true
+  become: True
   become_method: su
+  become_user: root
+  become_ask_pass: False
+  become_exe: "sudo su -"
   gather_facts: false
   hosts: web
   vars:
