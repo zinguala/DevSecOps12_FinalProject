@@ -14,14 +14,14 @@
     ansible.builtin.copy:
       src: /etc/minikube_configs/client-deployment-4replicas.yml
       dest: /home/{{ansible_user}}/minikube_configs
-      owner: {{ansible_user}}
+      owner: "{{ansible_user}}"
       group: sudo
 
   - name: copy minikube deployment config to web1
     ansible.builtin.copy:
       src: /etc/minikube_configs/client-deployment-service.yml
       dest: /home/{{ansible_user}}/minikube_configs
-      owner: {{ansible_user}}
+      owner: "{{ansible_user}}"
       group: sudo
 
   - name: apply the cluster with kubectl -restart minikube in case of error
