@@ -10,8 +10,7 @@
     file: 
       path: "/etc/minikube_configs"
       state: directory
-      owner: root
-      group: sudo
+      mode: '0755'
 
   - name: copy minikube deployment config to web1
     ansible.builtin.copy:
