@@ -1,4 +1,5 @@
 - name: copy and deploy cluster
+  become: true
   gather_facts: false
   hosts: web
   vars:
@@ -7,36 +8,36 @@
   tasks:
   - name: ensures minikube conf dir exists
     file: 
-      path: "/home/ansible/minikube_files"
+      path: "/etc/minikube_configs"
       state: directory
 
   - name: copy minikube deployment config to web1
     ansible.builtin.copy:
       src: /etc/minikube_configs/client-deployment-4replicas.yml
-      dest: /home/ansible/minikube_files
+      dest: /etc/minikube_configs
       owner: ansible
       group: sudo
 
   - name: copy minikube deployment config to web1
     ansible.builtin.copy:
       src: /etc/minikube_configs/client-deployment-service.yml
-      dest: /home/ansible/minikube_files
+      dest: /etc/minikube_configs
       owner: ansible
       group: sudo
 
   - name: apply the cluster with kubectl -restart minikube in case of error
     block:
       - name: apply the 4 replicas deployment
-        ansible.builtin.shell: kubectl apply -f /home/ansible/minikube_files/client-deployment-4replicas.yml
+        ansible.builtin.shell: kubectl apply -f /etc/minikube_configs/client-deployment-4replicas.yml
     
       - name: apply the 4 replicas service
-        ansible.builtin.shell: kubectl apply -f /home/ansible/minikube_files/client-deployment-service.yml
+        ansible.builtin.shell: kubectl apply -f /etc/minikube_configs/client-deployment-service.yml
     rescue:
       - name: restart minikube
         ansible.builtin.shell: minikube start
         
       - name: apply the 4 replicas deployment
-        ansible.builtin.shell: kubectl apply -f /home/ansible/minikube_files/client-deployment-4replicas.yml
+        ansible.builtin.shell: kubectl apply -f /etc/minikube_configs/client-deployment-4replicas.yml
     
       - name: apply the 4 replicas service
-        ansible.builtin.shell: kubectl apply -f /home/ansible/minikube_files/client-deployment-service.yml
+        ansible.builtin.shell: kubectl apply -f /etc/minikube_configs/client-deployment-service.yml
