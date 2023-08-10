@@ -55,11 +55,6 @@ pipeline {
             }
         }
 
-        stage('copy test.py /etc/minikube_configs') {
-            steps {
-                sh 'sudo cp test.py /etc/minikube_configs/test.py' 
-            }
-        }
 
 
         stage('playbook copy minikube configs to web host ,apply them and test them') {
