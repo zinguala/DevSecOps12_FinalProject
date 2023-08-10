@@ -5,7 +5,7 @@ def ping():
 
     data = {'body' : 'ping'}
 
-    r = requests.get('http://127.0.0.1:5005',json = data)
+    r = requests.get('http://localhost:5005',json = data)
     ans = r.json()
 
 
