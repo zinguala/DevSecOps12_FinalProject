@@ -10,14 +10,14 @@
       path: "/home/{{ansible_user}}/minikube_configs"
       state: directory
 
-  - name: copy minikube deployment config to web1
+  - name: copy minikube deployment config to web
     ansible.builtin.copy:
       src: /etc/minikube_configs/client-deployment-6replicas.yml
       dest: /home/{{ansible_user}}/minikube_configs
       owner: "{{ansible_user}}"
       group: sudo
 
-  - name: copy minikube deployment config to web1
+  - name: copy minikube deployment config to web
     ansible.builtin.copy:
       src: /etc/minikube_configs/client-deployment-service.yml
       dest: /home/{{ansible_user}}/minikube_configs
