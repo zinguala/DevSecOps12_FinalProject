@@ -1,5 +1,5 @@
 # DevSecOps12_FinalProject
-Welcome to our Final project at DevSecops course:  
+Welcome to our Final project in DevSecops course:  
 IN THIS PROJECT WE WILL BUILD A PYTHON FLASK APP WITH A PING-PONG FUNCTION A PING PONG FUNCTION IS A GET FUNCTION THAT RECEIVES THE GET REQUEST AS A SERVER  
 THE BODY OF THIS REQUEST IS A JSON WITH A CONTENT PING THE FLASK APP SHROUD RETURNS A 200 RESPONSE WITH A PONG JSON   
 WE WILL BUILD AN IMAGE THAT RUNS THE APPLICATION IN PORT 5005  
@@ -7,40 +7,40 @@ WE WILL BUILD A CLUSTER IN MINIKUBE TO RUN 4 INSTANCES OF THIS CONTAINER
 THE INSTANCE WILL BE A DEPLOYMENT WITH A 4 REPLICAS  
 USING ANSIBLE WE WILL BUILD A CRON JOB IN JENKINS TO ADD 2 REPLICAS AT 8:‎00 AND DELETE 2 REPLICAS AT 13:00  
 
-# here are the instructions to get it all working:  
+# Here are the instructions to get it all working:  
 
-# create ubuntu Web machine that will run the minikube cluster:
+# Create Ubuntu Web machine that will run the minikube cluster:
 
-1) first we will add the user for ansible ssh connection:
+1) At first we will add the user for the Ansible ssh connection:
 
 - “sudo adduser username”
   
 - sudo visudo : add the user with those privileges:  
  “username ALL=(ALL:ALL) ALL”
   
-- add username to sudoers group: “sudo usermod -aG sudo username”
+- add the username to sudoers group: “sudo usermod -aG sudo username”
 
-- check group of username : 'groups username' 
+- check group of username: 'groups username' 
 
 
 2) installation of the minikube cluster:
 
-- sign in to the ansible user
+- Sign in to the Ansible user
    
-- install open-ssh-server: “sudo apt install openssh-server”
+- Install open-ssh-server: “sudo apt install openssh-server”
 
-- install docker: “sudo apt install docker.io”
+- Install docker: “sudo apt install docker.io”
 
-- to run docker without sudo: “sudo usermod -aG docker $USER && newgrp docker”
+- To run docker without sudo: “sudo usermod -aG docker $USER && newgrp docker”
 
-- install minikube: https://minikube.sigs.k8s.io/docs/start/
+- Install minikube: https://minikube.sigs.k8s.io/docs/start/
 
-- install kubectl: “sudo snap install kubectl --classic”
+- Install kubectl: “sudo snap install kubectl --classic”
 
-- start the minikube: “minkube start”
+- Start the minikube: “minkube start”
 
 
-3) Next install nginx for port forward from our web-machine-ip:5005 to our deployment’s loadbalancer nodeport:
+3) Next install nginx for port forward from our web-machine-ip:5005 to our deployment’s load-balancer's nodeport:
    
 - sudo apt update
 
@@ -74,24 +74,26 @@ stream {
 
 # Create ubuntu Jenkins + ansible machine:
 
-4) install and config ansible and jenkins:
+4) Install and config Ansible and jenkins:
    
 - Install Jenkins:   https://www.jenkins.io/doc/book/installing/linux/
 
 - Install GIT: "sudo apt install git" 
 
-- install ansible: https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
+- Install ansible: https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
 
-- install open ssh client: “sudo apt install openssh-client”
+- Install open ssh client: “sudo apt install openssh-client”
 
-- create private key for secured ssh connection: “sudo ssh-keygen”
+- Create a private key for a secured ssh connection: “sudo ssh-keygen”
 
-- copy to privet key for web machine host connection- use the username and password created for ansible at the web machine:
+- Copy the privet key for web machine host connection- use the username and password the used to created for Ansible at the web machine:
    “ssh-copy-id -i /root/.ssh/id_rsa username@webmachine-ip-address”
 
-- create inventory file called "inventory" in /etc/ansible/inventory directory : “sudo mkdir -p /etc/ansible/inventory”
+- Create an inventory file called "inventory" in /etc/ansible/inventory directory: “sudo mkdir -p /etc/ansible/inventory”  
+the playbook will work only if the inventory will be called "inventory" will be in this path: /etc/ansible/inventory
   
-- "nano /etc/ansible/inventory/inventory":
+- Creating the inventory: "nano /etc/ansible/inventory/inventory":
+  Make sure the minikube host will be under group "web" as shown below (the playbook is configured to run on group "web")
 --------------------------------------------------
 [web]  
 hostname ansible_host=vm-ip ansible_user=username
@@ -101,7 +103,8 @@ ansible_ssh_private_key_file=/root/.ssh/id_rsa
 
 --------------------------------------------------
 
-5) add Jenkins permission so we can run sudo without password:
+
+5) Add Jenkins permission so we can run sudo without a password:
    
 - sudo su
   
@@ -111,21 +114,21 @@ ansible_ssh_private_key_file=/root/.ssh/id_rsa
 
 jenkins ALL=(ALL) NOPASSWD: ALL
 
-6) create the pipelines with cron jobs:
+6) Create the pipelines with cron jobs:
 
 # Creating the first job of running the cluster with 4 replicas at 13:00 every day:
 
-- from the jenkins dashboard choose a new item 
+- From the jenkins dashboard choose a new item 
 
-- enter the item name, choose pipeline, and hit "ok".
+- Enter the item name, choose pipeline, and hit "ok".
 
-- optionally can add a description
+- Optionally can add a description
 
-- in the build triggers section choose buil periodically as shown below add the time period:  0 13 * * *
+- In the build triggers section choose buil periodically as shown below add the time period:  0 13 * * *
   
 ![image](https://github.com/zinguala/DevSecOps12_FinalProject/assets/34973070/e1f6b8e5-a61a-4551-8bc2-053d9684cdc8)
 
-- now move the pipeline section and in the definition choose pipeline script from SCM
+- Now move the pipeline section and in the definition choose pipeline script from SCM
 
 - SCM: Git
 
@@ -136,21 +139,21 @@ jenkins ALL=(ALL) NOPASSWD: ALL
 - Script Path:"Jenkinsfile_4_replicas"
 ![image](https://github.com/zinguala/DevSecOps12_FinalProject/assets/34973070/6f7339f7-1ec6-4c5e-9145-eb6772797d89)
 
-- at the end hit save
+- At the end hit save
 
 # Creating the second job of running the cluster with 6 replicas at 8:00 every day:
 
-- from the jenkins dashboard choose a new item 
+- From the jenkins dashboard choose a new item 
 
-- enter the item name, choose pipeline, and hit "ok".
+- Enter the item name, choose pipeline, and hit "ok".
 
-- optionally can add a description
+- Optionally can add a description
 
-- in the build triggers section choose buil periodically as shown below add the time period:  0 8 * * *
+- In the build triggers section choose buil periodically as shown below add the time period:  0 8 * * *
 
 ![image](https://github.com/zinguala/DevSecOps12_FinalProject/assets/34973070/1230c1fb-623e-4b16-8b5b-64991461616e)
 
-- now move the pipeline section and in the definition choose pipeline script from SCM
+- Now move the pipeline section and in the definition choose pipeline script from SCM
 
 - SCM: Git
 
@@ -162,18 +165,20 @@ jenkins ALL=(ALL) NOPASSWD: ALL
   
 ![image](https://github.com/zinguala/DevSecOps12_FinalProject/assets/34973070/be2eb371-cb88-4967-83c7-6c032f28e7a5)
 
-- at the end hit save
+- At the end hit save
+
+- ---------------------------------------------------------------------------------------------------------------------
 
 # installtion finished!!! now its time to test the cluster:
 
-- fisrt run one of the jenkins jobs: click on build now and wait for the build to finish.
+- At first run one of the jenkins jobs: click on build now and wait for the build to finish.
 
-- create vm and install postman: "sudo snap install postman"
+- Create VM that can communicate with the web network and install postman: "sudo snap install postman"
 
-- open postman: "postman"
+- Open postman: "postman"
 
-- create get request to web host (runs the minikube cluster) ip:5005  
-the body of the request is raw JSON: 
+- Create get request to web host (runs the minikube cluster) ip:5005  
+The body of the request is a raw - JSON: 
 {  
 "body" : "ping"  
 }  
