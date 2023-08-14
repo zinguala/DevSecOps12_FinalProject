@@ -43,13 +43,11 @@
 
   - name: check if nginx running if now start the service
     block:
-      - name: Check all port numbers are accessible from the current host
-        wait_for:
-          port: 5005
-          state: started         # Port should be open
-          delay: 0               # No wait before first check (sec)
-          timeout: 5             # Stop checking after timeout (sec)
-          ignore_errors: yes
+      - name: Confirm Automation Agent is running
+        command: sudo service nginx status
+        register: agent_status
+        failed_when: "'inactive' in agent_status.stdout"
+        changed_when: False
         
     rescue:
       - name: restart nginx service
