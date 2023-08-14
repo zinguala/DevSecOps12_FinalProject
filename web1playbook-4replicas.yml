@@ -49,7 +49,7 @@
     ansible.builtin.service:
       name: nginx.service
       state: started
-      when: ansible_facts.services['nginx.service'].state == 'stopped'
+    when: ansible_facts.services['nginx.service'].state == 'stopped'
         
 
  
