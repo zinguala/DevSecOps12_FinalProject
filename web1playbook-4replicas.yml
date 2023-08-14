@@ -28,7 +28,7 @@
   - name: copy test.py
     ansible.builtin.copy:
       src: /etc/minikube_configs/test.py
-      dest: /home/{{ansible_user}}/test.py
+      dest: /home/{{ansible_user}}/minikube_configstest.py
       owner: "{{ansible_user}}"
       group: sudo
       
