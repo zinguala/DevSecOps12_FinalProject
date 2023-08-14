@@ -48,3 +48,6 @@
   - name: start nginx if nginx.service is stopped
     ansible.builtin.shell: sudo /etc/init.d/nginx restart
     when: ansible_facts.services['nginx.service'].state == 'stopped'
+    register: rez
+      debug: 
+        var: rez.stdout_lines
