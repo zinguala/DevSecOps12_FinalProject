@@ -51,7 +51,7 @@ USING ANSIBLE WE WILL BUILD A CRON JOB IN JENKINS TO ADD 2 REPLICAS AT 8:‎00 A
 - Enable nginx so it will run after reboot: "sudo systemctl enable nginx.service"
 
 - We need to change the serivce config for nginx for only start after the network  
-adapter is online or otherwise the service will fail: sudo nano /lib/systemd/system/nginx.service
+adapter is online or otherwise the service will fail: "sudo nano /lib/systemd/system/nginx.service"
 
 - We will need to change one line at the Unit's section:
   
