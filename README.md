@@ -46,14 +46,41 @@ USING ANSIBLE WE WILL BUILD A CRON JOB IN JENKINS TO ADD 2 REPLICAS AT 8:‎00 A
 
 - sudo apt install nginx
 
-- Enable nginx so it will run after reboot: "systemctl enable nginx.service"
+- Enable nginx so it will run after reboot: "sudo systemctl enable nginx.service"
 
-- First check the minikube ip: “minikube ip”
+- We need to change the serivce config for nginx for only start after the network  
+adapter is online or otherwise the service will fail: sudo nano /lib/systemd/system/nginx.service
+
+- We will need to change the Unis's section:
+  
+from: "After=network.target nss-lookup.target"
+-------------------------------------------------------------------------
+
+[Unit]    
+Description=A high performance web server and a reverse proxy server    
+Documentation=man:nginx(8)    
+After=network.target nss-lookup.target    
+
+-------------------------------------------------------------------------
+
+to: "After=network-online.target nss-lookup.target"
+-------------------------------------------------------------------------
+
+[Unit]    
+Description=A high performance web server and a reverse proxy server  
+Documentation=man:nginx(8)  
+After=network-online.target nss-lookup.target  
+
+-------------------------------------------------------------------------
+
+
+
+- Now check the minikube ip: “minikube ip”
 
 - Config nginx.conf file, make it transform traffic without dealing the SSL and certs:
 - “sudo nano /etc/nginx/nginx.conf”
 - Add the following config and save the file  
---------------------------------------------------  
+-------------------------------------------------------------------------  
 
 stream {  
   server {  
@@ -63,7 +90,7 @@ stream {
   }  
 }  
 
-----------------------------------------------------  
+---------------------------------------------------------------------------  
 
 - Check Nginx config: “sudo nginx -t”
   
