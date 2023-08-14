@@ -2,6 +2,7 @@
   hosts: web
   vars:
     asnible_python_interpreter: /usr/bin/python3
+  become: true
   
   tasks:
   - name: ensures minikube conf dir exists
