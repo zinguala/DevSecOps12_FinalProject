@@ -23,6 +23,7 @@ USING ANSIBLE WE WILL BUILD A CRON JOB IN JENKINS TO ADD 2 REPLICAS AT 8:‎00 A
 - check group of username: 'groups username' 
 
 
+
 2) installation of the minikube cluster:
 
 - Sign in to the Ansible user
@@ -38,6 +39,7 @@ USING ANSIBLE WE WILL BUILD A CRON JOB IN JENKINS TO ADD 2 REPLICAS AT 8:‎00 A
 - Install kubectl: “sudo snap install kubectl --classic”
 
 - Start the minikube: “minkube start”
+
 
 
 3) Next install nginx for port forward from our web-machine-ip:5005 to our deployment’s load-balancer's nodeport:
@@ -101,6 +103,7 @@ stream {
 - Check ufw status: “sudo ufw status”
 
 
+
 # Create ubuntu Jenkins + ansible machine:
 
 4) Install and config Ansible and jenkins:
@@ -133,6 +136,7 @@ ansible_ssh_private_key_file=/root/.ssh/id_rsa
 --------------------------------------------------
 
 
+
 5) Add Jenkins permission so we can run sudo without a password:
    
 - sudo su
@@ -142,6 +146,8 @@ ansible_ssh_private_key_file=/root/.ssh/id_rsa
 - then add this line to the file:
 
 jenkins ALL=(ALL) NOPASSWD: ALL
+
+
 
 6) Create the pipelines with cron jobs:
 
