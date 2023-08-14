@@ -51,7 +51,7 @@
         
     rescue:
       - name: restart nginx service
-        ansible.builtin.shell: sudo service nginx start
+        ansible.builtin.shell: sudo systemctl start nginx.service
         
 
  
