@@ -44,7 +44,7 @@
   - name: check if nginx running if now start the service
     block:
       - name: Confirm nginx is running
-        command: sudo service nginx status
+        command: sudo systemctl status nginx.service
         register: nginx_status
         failed_when: "'inactive' in nginx_status.stdout"
         changed_when: False
