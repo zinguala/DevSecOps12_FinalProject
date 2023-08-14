@@ -43,8 +43,14 @@
 
   - name: check if nginx running if now start the service
     block:
-      - name: check nginx
-        ansible.builtin.shell:  telnet  $(hostname -I | awk '{print $1}') 5005
+      - name: Check all port numbers are accessible from the current host
+        wait_for:
+        host: web
+        port: 5005
+        state: started         # Port should be open
+        delay: 0               # No wait before first check (sec)
+        timeout: 5             # Stop checking after timeout (sec)
+        ignore_errors: yes
         
     rescue:
       - name: restart nginx service
