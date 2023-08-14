@@ -47,7 +47,7 @@
         command: sudo systemctl status nginx.service
         register: nginx_status
         failed_when: "'inactive' in nginx_status.stdout"
-        changed_when: False
+        changed_when: "'active' in nginx_status.stdout"
         
     rescue:
       - name: restart nginx service
