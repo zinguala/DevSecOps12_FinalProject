@@ -40,3 +40,15 @@
     
       - name: apply the 4 replicas service
         ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/minikube_configs/client-deployment-service.yml
+
+  - name: check if nginx running if now start the service
+    block:
+      - name: check nginx
+        ansible.builtin.shell:  telnet  $(hostname -I | awk '{print $1}') 5005
+        
+    rescue:
+      - name: restart nginx service
+        ansible.builtin.shell: sudo service nginx start
+        
+
+ 
