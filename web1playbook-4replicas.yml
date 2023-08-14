@@ -50,5 +50,5 @@
     when: ansible_facts.services['nginx.service'].state == 'stopped'
     register: rez
     
-  - debug: 
-    var: rez.stdout_lines
+  - debug:  msg="{{ rez.stdout }}"
+
