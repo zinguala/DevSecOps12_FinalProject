@@ -46,6 +46,8 @@ USING ANSIBLE WE WILL BUILD A CRON JOB IN JENKINS TO ADD 2 REPLICAS AT 8:‎00 A
 
 - sudo apt install nginx
 
+- Enable nginx so it will run after reboot: "systemctl enable nginx.service"
+
 - First check the minikube ip: “minikube ip”
 
 - Config nginx.conf file, make it transform traffic without dealing the SSL and certs:
