@@ -1,5 +1,4 @@
 - name: copy and deploy cluster
-  gather_facts: false
   hosts: web
   vars:
     asnible_python_interpreter: /usr/bin/python3
@@ -41,17 +40,14 @@
       - name: apply the 4 replicas service
         ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/minikube_configs/client-deployment-service.yml
 
-  - name: check if nginx running if now start the service
-    block:
-      - name: Confirm nginx is running
-        command: sudo systemctl status nginx.service
-        register: nginx_status
-        failed_when: "'inactive' in nginx_status.stdout"
-        changed_when: "'active' in nginx_status.stdout"
-        
-    rescue:
-      - name: restart nginx service
-        ansible.builtin.shell: sudo systemctl start nginx.service
+  - name: Populate service facts
+    service_facts:
+  
+  - name: start nginx if enginx.service is stopped
+    service:
+      name: nginx
+      state: started
+    when: ansible_facts.services['nginx.service'].state == 'stopped'
         
 
  
