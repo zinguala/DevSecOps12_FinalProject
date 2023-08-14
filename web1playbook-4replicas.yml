@@ -49,6 +49,6 @@
       - name: apply the 4 replicas service
         ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/minikube_configs/client-deployment-service.yml
 
-  - name: apply the cluster with kubectl -restart minikube in case of error
+  - name: run test.py
     ansible.builtin.shell: sudo python3 /home/{{ansible_user}}/minikube_configs/test.py
 
