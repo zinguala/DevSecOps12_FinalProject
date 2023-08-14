@@ -45,11 +45,11 @@
     block:
       - name: Check all port numbers are accessible from the current host
         wait_for:
-        port: 5005
-        state: started         # Port should be open
-        delay: 0               # No wait before first check (sec)
-        timeout: 5             # Stop checking after timeout (sec)
-        ignore_errors: yes
+          port: 5005
+          state: started         # Port should be open
+          delay: 0               # No wait before first check (sec)
+          timeout: 5             # Stop checking after timeout (sec)
+          ignore_errors: yes
         
     rescue:
       - name: restart nginx service
