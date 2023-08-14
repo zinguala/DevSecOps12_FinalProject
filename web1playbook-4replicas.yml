@@ -3,6 +3,7 @@
   vars:
     asnible_python_interpreter: /usr/bin/python3
   become: true
+  become_user: "{{ansible_user}}"
   
   tasks:
   - name: ensures minikube conf dir exists
