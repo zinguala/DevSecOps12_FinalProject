@@ -42,11 +42,3 @@
       - name: apply the 4 replicas service
         ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/minikube_configs/client-deployment-service.yml
         
-  - name: Populate service facts
-    service_facts:
-  
-  - name: start nginx if nginx.service is stopped
-    service: 
-      name: nginx
-      state: restarted
-    when: ansible_facts.services['nginx.service'].state == 'stopped'
