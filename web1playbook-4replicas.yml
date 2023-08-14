@@ -43,10 +43,10 @@
 
   - name: check if nginx running if now start the service
     block:
-      - name: Confirm Automation Agent is running
+      - name: Confirm nginx is running
         command: sudo service nginx status
-        register: agent_status
-        failed_when: "'inactive' in agent_status.stdout"
+        register: nginx_status
+        failed_when: "'inactive' in nginx_status.stdout"
         changed_when: False
         
     rescue:
