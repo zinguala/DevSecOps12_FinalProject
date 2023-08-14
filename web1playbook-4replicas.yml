@@ -45,6 +45,7 @@
   
   - name: start nginx if nginx.service is stopped
     ansible.builtin.shell: sudo systemctl start nginx.service
+    async: 10
     poll: 0
     when: ansible_facts.services['nginx.service'].state == 'stopped'
         
