@@ -42,9 +42,9 @@
   - name: apply the 4 replicas service
     ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/new_minikube_configs/client-deployment-service.yml
         
-  - name: Pause for 45 sec to build the web app 
+  - name: Pause for 30 sec to build the web app 
     ansible.builtin.pause:
-      seconds: 25
+      seconds: 30
       
   - name: ip check
     ansible.builtin.shell: hostname -I | awk '{print $1}'
