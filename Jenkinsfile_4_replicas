@@ -66,7 +66,7 @@ pipeline {
 
         stage('playbook copy minikube configs to web host and apply them') {
             steps {
-                sh 'sudo ansible-playbook /etc/ansible/playbooks/web1playbook-4replicas.yml -i /etc/ansible/inventory/inventory -vvv'
+                sh 'sudo ansible-playbook /etc/ansible/playbooks/web1playbook-4replicas.yml -i /etc/ansible/inventory/inventory'
     
             }
         }
