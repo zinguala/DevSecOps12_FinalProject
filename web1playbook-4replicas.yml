@@ -36,17 +36,13 @@
   - name: start minikube
         ansible.builtin.shell: minikube start
 
-  
-   
   - name: apply the 4 replicas deployment
     ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/new_minikube_configs/client-deployment-4replicas.yml
     
   - name: apply the 4 replicas service
     ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/new_minikube_configs/client-deployment-service.yml
-
-
         
-  - name: Pause for 25 sec to build app 
+  - name: Pause for 45 sec to build the web app 
     ansible.builtin.pause:
       seconds: 25
       
