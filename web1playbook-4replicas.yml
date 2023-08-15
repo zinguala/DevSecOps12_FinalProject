@@ -59,8 +59,8 @@
   - name: Prints two lines of messages, but only if there is an environment value set
     ansible.builtin.debug:
     msg:
-    - "ip= :{{ ip.stdout }}"
-    - "answer= :{{ answer.stdout }}""
+    - "ip= "{{ ip.stdout }}""
+    - "answer= "{{ answer.stdout }}""
    
     
    
