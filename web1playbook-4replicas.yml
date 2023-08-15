@@ -57,7 +57,7 @@
   tasks:
   
   - name: Echo the output - PLAY1 variable vaule
-    ansible.builtin.shell: cat {{ hostvars['DUMMY_HOST']['CLUSTER_HOST__IP'] }} |tail -1
+    ansible.builtin.shell: {{ hostvars['DUMMY_HOST']['CLUSTER_HOST__IP'] }} |tail -1
     register: host__ip
     
   - debug: 
