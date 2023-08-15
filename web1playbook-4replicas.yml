@@ -83,14 +83,16 @@
   vars:
     asnible_python_interpreter: /usr/bin/python3
   become: true
-  become_user: "{{ansible_user}}"       
+  become_user: "{{ansible_user}}" 
+  vars:
+      answer: {{ hostvars['DUMMY_HOST2']['cluster_check'] }}
   
   tasks:
   - name: run check for the output if not rollback
     ansible.builtin.shell: cp /home/{{ansible_user}}/new_minikube_configs/client-deployment-4replicas.yml /home/{{ansible_user}}/current_minikube_configs/client-deployment-4replicas.yml 
-    when: {{ hostvars['DUMMY_HOST2']['cluster_check'] }} == "pong"
+    when: "{{answer}}" == "pong"
   - debug:
-      msg: "ip answer = {{ hostvars['DUMMY_HOST2']['cluster_check'] }}"
+      msg: " {{answer}} = {{ hostvars['DUMMY_HOST2']['cluster_check'] }}"
       
 
    
