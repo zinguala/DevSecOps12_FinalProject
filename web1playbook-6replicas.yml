@@ -1,42 +1,109 @@
 - name: copy and deploy cluster
-  gather_facts: false
   hosts: web
   vars:
     asnible_python_interpreter: /usr/bin/python3
+  become: true
+  become_user: "{{ ansible_user }}"
   
   tasks:
-  - name: ensures minikube conf dir exists
+  - name: ensures minikube current conf dir exists
     file: 
-      path: "/home/{{ansible_user}}/minikube_configs"
+      path: "/home/{{ansible_user}}/current_minikube_configs"
+      state: directory
+      
+  - name: ensures minikube new conf dir exists
+    file: 
+      path: "/home/{{ansible_user}}/new_minikube_configs"
       state: directory
 
   - name: copy minikube deployment config to web
     ansible.builtin.copy:
       src: /etc/minikube_configs/client-deployment-6replicas.yml
-      dest: /home/{{ansible_user}}/minikube_configs
-      owner: "{{ansible_user}}"
+      dest: /home/{{ansible_user}}/new_minikube_configs
+      owner: "{{ ansible_user }}"
       group: sudo
 
   - name: copy minikube deployment config to web
     ansible.builtin.copy:
       src: /etc/minikube_configs/client-deployment-service.yml
-      dest: /home/{{ansible_user}}/minikube_configs
-      owner: "{{ansible_user}}"
+      dest: /home/{{ansible_user}}/new_minikube_configs
+      owner: "{{ ansible_user }}"
       group: sudo
 
-  - name: apply the cluster with kubectl -restart minikube in case of error
-    block:
-      - name: apply the 4 replicas deployment
-        ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/minikube_configs/client-deployment-6replicas.yml
+  - name: delete the previous deployment and service
+    ansible.builtin.shell: minikube delete --all
+
+  - name: start minikube
+    ansible.builtin.shell: minikube start
+
+  - name: apply the 6 replicas deployment
+    ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/new_minikube_configs/client-deployment-6replicas.yml
     
-      - name: apply the 4 replicas service
-        ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/minikube_configs/client-deployment-service.yml
-    rescue:
-      - name: restart minikube
-        ansible.builtin.shell: minikube start
+  - name: apply the 6 replicas service
+    ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/new_minikube_configs/client-deployment-service.yml
         
-      - name: apply the 4 replicas deployment
-        ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/minikube_configs/client-deployment-6replicas.yml
+  - name: Pause for 30 sec to build the web app 
+    ansible.builtin.pause:
+      seconds: 30
+      
+  - name: ip check
+    ansible.builtin.shell: hostname -I | awk '{print $1}'
+    register: ip
+
+  - name: Register dummy host with variable so we will be able to use on other hosts tasks
+    add_host:
+      name: "DUMMY_HOST"
+      CLUSTER_HOST__IP: "{{ ip.stdout }}"
+      
+- name: run check for the output if not rollback
+  hosts: localhost
+  
+  tasks:
+  - name: run check for the output if not rollback
+    ansible.builtin.shell: sudo python3 /etc/minikube_configs/test.py {{ hostvars['DUMMY_HOST']['CLUSTER_HOST__IP'] }}
+    register: answer
+    ignore_errors: True
     
-      - name: apply the 4 replicas service
-        ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/minikube_configs/client-deployment-service.yml
+  - name: Register dummy host with variable so we will be able to use on other hosts tasks
+    add_host:
+      name: "DUMMY_HOST2"
+      cluster_check : "{{ answer.stdout }}"
+
+  - debug:
+      msg: "ip answer= {{ answer.stdout }}"
+
+
+- name:  run check for the output if ok store the config as current
+  hosts: web
+  vars:
+    asnible_python_interpreter: /usr/bin/python3
+  become: true
+  become_user: "{{ ansible_user }}" 
+  
+  tasks:
+  - name: if check is ok copy deployment config from new to current
+    ansible.builtin.shell: cp /home/{{ansible_user}}/new_minikube_configs/client-deployment-6replicas.yml /home/{{ansible_user}}/current_minikube_configs/client-deployment-6replicas.yml 
+    when:  hostvars['DUMMY_HOST2']['cluster_check'] == "pong"
+    
+  - debug:
+      msg: " answer = {{ hostvars['DUMMY_HOST2']['cluster_check'] }}"
+
+  - name: if check is ok copy service config from new to current 
+    ansible.builtin.shell: cp /home/{{ansible_user}}/new_minikube_configs/client-deployment-service.yml /home/{{ansible_user}}/current_minikube_configs/client-deployment-service.yml
+    when:  hostvars['DUMMY_HOST2']['cluster_check'] == "pong"
+
+  - name: remove from minikube the previous deployment and service
+    ansible.builtin.shell: minikube delete --all
+    when:  hostvars['DUMMY_HOST2']['cluster_check'] != "pong"
+    
+  - name: start minikube
+    ansible.builtin.shell: minikube start
+    when:  hostvars['DUMMY_HOST2']['cluster_check'] != "pong"
+
+  - name: if check is not ok - rollback to previous version - apply current deployment config 
+    ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/current_minikube_configs/client-deployment-6replicas.yml
+    when:  hostvars['DUMMY_HOST2']['cluster_check'] != "pong"
+   
+  - name: if check is not ok - rollback to previous version - apply current service config 
+    ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/current_minikube_configs/client-deployment-service.yml
+    when:  hostvars['DUMMY_HOST2']['cluster_check'] != "pong"
