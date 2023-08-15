@@ -57,7 +57,7 @@
     register: answer
 
   - debug:
-      msg: " answer= {{ answer.stdout }}"
+      msg: "{{ ip.stdout }} ip answer= {{ answer.stdout }}"
    
     
    
