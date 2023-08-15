@@ -83,7 +83,7 @@
     asnible_python_interpreter: /usr/bin/python3
   become: true
   become_user: "{{ansible_user}}"
-  when: "{{ hostvars['DUMMY_HOST2']['CLUSTER_CHECK_RESULTS'] }} == "pong""          
+  when: "{{ hostvars['DUMMY_HOST2']['CLUSTER_CHECK_RESULTS'] }} == pong"          
   
   tasks:
   - name: run check for the output if not rollback
