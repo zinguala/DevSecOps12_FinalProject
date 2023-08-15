@@ -59,7 +59,7 @@
   - name: Register dummy host with variable so we will be able to use on other hosts tasks
     add_host:
       name: "DUMMY_HOST"
-      CLUSTER_HOST__IP: " {{ ip.stdout }}"
+      CLUSTER_HOST__IP: "{{ ip.stdout }}"
       
 - name: run check for the output if not rollback
   hosts: localhost
@@ -72,7 +72,7 @@
   - name: Register dummy host with variable so we will be able to use on other hosts tasks
     add_host:
       name: "DUMMY_HOST2"
-      cluster_check : " {{ answer.stdout }}"
+      cluster_check : "{{ answer.stdout }}"
 
   - debug:
       msg: "ip answer= {{ answer.stdout }}"
