@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: pingpong
-        image: zinguala/flask_ping_pong
+        image: zinguala/flask_ping_pongp
         ports:
         - containerPort: 5005
