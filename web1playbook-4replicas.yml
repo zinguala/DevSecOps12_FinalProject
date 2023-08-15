@@ -75,7 +75,7 @@
 - name: run check for the output if not rollback
   hosts: web
   ansible.builtin.shell: sudo cp /home/{{ansible_user}}/new_minikube_configs/client-deployment-4replicas.yml /home/{{ansible_user}}/current_minikube_configs/client-deployment-4replicas.yml 
-  when: {{answer.stdout}} == "pong"
+  when: "pong" == "pong"
 
    
     
