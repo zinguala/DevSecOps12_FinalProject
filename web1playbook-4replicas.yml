@@ -77,7 +77,8 @@
   - debug:
       msg: "ip answer= {{ answer.stdout }}"
 
-- name:   run check for the output if not rollback
+
+- name:  run check for the output if not rollback
   hosts: web
   vars:
     asnible_python_interpreter: /usr/bin/python3
