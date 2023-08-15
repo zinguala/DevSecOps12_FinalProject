@@ -50,14 +50,14 @@
  
 - name: run check for the output if not rollback
   hosts: localhost
-   tasks:
+  tasks:
    
-    - name: run check for the output if not rollback
-      ansible.builtin.shell: sudo python3 /etc/minikube_configs/test.py 192.168.52.130
-      register: answer
+  - name: run check for the output if not rollback
+    ansible.builtin.shell: sudo python3 /etc/minikube_configs/test.py 192.168.52.130
+    register: answer
 
-    - debug:
-        msg: " answer= {{ answer.stdout }}"
+  - debug:
+      msg: " answer= {{ answer.stdout }}"
    
     
    
