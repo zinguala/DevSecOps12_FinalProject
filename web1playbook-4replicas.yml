@@ -89,7 +89,7 @@
   - set_fact: answer= {{hostvars['DUMMY_HOST2']['cluster_check']}}
   
   - name: run check for the output if not rollback
-    ansible.builtin.shell: cp /home/{{ansible_user}}/new_minikube_configs/client-deployment-4replicas.yml /home/{{ansible_user}}/current_minikube_configs/client-deployment-4replicas.yml 
+    shell: cp /home/{{ansible_user}}/new_minikube_configs/client-deployment-4replicas.yml /home/{{ansible_user}}/current_minikube_configs/client-deployment-4replicas.yml 
     when: {{answer}} == "pong"
   - debug:
       msg: " {{answer}} = {{ hostvars['DUMMY_HOST2']['cluster_check'] }}"
