@@ -47,12 +47,17 @@
     ansible.builtin.shell: hostname -I | awk '{print $1}'
     register: ip
 
+  - name: Register dummy host with variable so we will be able to use on other hosts tasks
+    add_host:
+      name: "DUMMY_HOST"
+      CLUSTER_HOST__IP: " {{ ip.stdout }}"
+
 - name: run check for the output if not rollback
   hosts: localhost
   tasks:
   
   - name: Echo the output - PLAY1 variable vaule
-    shell: cat {{ hostvars['web']['ip.stdout'] }} |tail -1
+    ansible.builtin.shell: cat {{ hostvars['DUMMY_HOST']['CLUSTER_HOST__IP'] }} |tail -1
     register: host__ip
    
   - name: run check for the output if not rollback
