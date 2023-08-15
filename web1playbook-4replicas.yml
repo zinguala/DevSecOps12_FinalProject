@@ -50,7 +50,7 @@
 
 - name: run check for the output if not rollback
   hosts: localhost
-    connection: local 
+  connection: local 
   tasks:
   - name: run check for the output if not rollback
     command: python3 test.py
