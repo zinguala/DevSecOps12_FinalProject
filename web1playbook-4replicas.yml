@@ -3,7 +3,7 @@
   vars:
     asnible_python_interpreter: /usr/bin/python3
   become: true
-  become_user: "{{ansible_user}}"
+  become_user: "{{ ansible_user }}"
   
   tasks:
   - name: ensures minikube current conf dir exists
@@ -20,14 +20,14 @@
     ansible.builtin.copy:
       src: /etc/minikube_configs/client-deployment-4replicas.yml
       dest: /home/{{ansible_user}}/new_minikube_configs
-      owner: "{{ansible_user}}"
+      owner: "{{ ansible_user }}"
       group: sudo
 
   - name: copy minikube deployment config to web
     ansible.builtin.copy:
       src: /etc/minikube_configs/client-deployment-service.yml
       dest: /home/{{ansible_user}}/new_minikube_configs
-      owner: "{{ansible_user}}"
+      owner: "{{ ansible_user }}"
       group: sudo
       
   - name: apply the cluster with kubectl -restart minikube in case of error
@@ -83,16 +83,16 @@
   vars:
     asnible_python_interpreter: /usr/bin/python3
   become: true
-  become_user: "{{ansible_user}}" 
+  become_user: "{{ ansible_user }}" 
   
   tasks:
-  - set_fact: answer= {{hostvars['DUMMY_HOST2']['cluster_check']}}
+  - set_fact: answer = {{ hostvars['DUMMY_HOST2']['cluster_check'] }}
   
   - name: run check for the output if not rollback
     shell: cp /home/{{ansible_user}}/new_minikube_configs/client-deployment-4replicas.yml /home/{{ansible_user}}/current_minikube_configs/client-deployment-4replicas.yml 
-    when: {{answer}} == "pong"
+    when: {{ answer }} == "pong"
   - debug:
-      msg: " {{answer}} = {{ hostvars['DUMMY_HOST2']['cluster_check'] }}"
+      msg: " {{ answer }} = {{ hostvars['DUMMY_HOST2']['cluster_check'] }}"
       
 
    
