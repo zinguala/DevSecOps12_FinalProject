@@ -72,7 +72,7 @@
   - name: Register dummy host with variable so we will be able to use on other hosts tasks
     add_host:
       name: "DUMMY_HOST2"
-      CLUSTER_CHECK_RESULTS : " {{ answer.stdout }}"
+      cluster_check : " {{ answer.stdout }}"
 
   - debug:
       msg: "ip answer= {{ answer.stdout }}"
@@ -88,7 +88,7 @@
   tasks:
   - name: run check for the output if not rollback
     ansible.builtin.shell: sudo cp /home/{{ansible_user}}/new_minikube_configs/client-deployment-4replicas.yml /home/{{ansible_user}}/current_minikube_configs/client-deployment-4replicas.yml 
-    when: "{{ hostvars['DUMMY_HOST2']['CLUSTER_CHECK_RESULTS'] }}" == "pong"    
+    when: "{{ hostvars['DUMMY_HOST2']['cluster_check'] }}" == "pong"    
 
    
     
