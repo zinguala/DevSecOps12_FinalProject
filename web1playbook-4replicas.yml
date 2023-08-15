@@ -30,17 +30,23 @@
       owner: "{{ ansible_user }}"
       group: sudo
 
-  - name: delete the previous deployment and service
-    ansible.builtin.shell: minikube delete --all
-
-  - name: start minikube
-    ansible.builtin.shell: minikube start
-
-  - name: apply the 4 replicas deployment
-    ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/new_minikube_configs/client-deployment-4replicas.yml
+ - name: apply the cluster with kubectl -restart minikube in case of error
+    block:
+      - name: apply the 4 replicas deployment
+        ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/new_minikube_configs/client-deployment-4replicas.yml
     
-  - name: apply the 4 replicas service
-    ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/new_minikube_configs/client-deployment-service.yml
+      - name: apply the 4 replicas service
+        ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/new_minikube_configs/client-deployment-service.yml
+
+    rescue:
+      - name: start minikube
+        ansible.builtin.shell: minikube start
+
+      - name: apply the 4 replicas deployment
+        ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/new_minikube_configs/client-deployment-4replicas.yml
+    
+      - name: apply the 4 replicas service
+        ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/new_minikube_configs/client-deployment-service.yml
         
   - name: Pause for 30 sec to build the web app 
     ansible.builtin.pause:
