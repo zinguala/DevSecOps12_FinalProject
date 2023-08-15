@@ -69,13 +69,26 @@
     ansible.builtin.shell: sudo python3 /etc/minikube_configs/test.py {{ hostvars['DUMMY_HOST']['CLUSTER_HOST__IP'] }}
     register: answer
 
+  - name: Register dummy host with variable so we will be able to use on other hosts tasks
+    add_host:
+      name: "DUMMY_HOST2"
+      CLUSTER_CHECK_RESULTS : " {{ answer.stdout }}"
+
   - debug:
       msg: "ip answer= {{ answer.stdout }}"
 
-- name: run check for the output if not rollback
+- name: 
   hosts: web
-  ansible.builtin.shell: sudo cp /home/{{ansible_user}}/new_minikube_configs/client-deployment-4replicas.yml /home/{{ansible_user}}/current_minikube_configs/client-deployment-4replicas.yml 
-  when: '"pong" == "pong"'
+  vars:
+    asnible_python_interpreter: /usr/bin/python3
+  become: true
+  become_user: "{{ansible_user}}"
+  when: "{{ hostvars['DUMMY_HOST2']['CLUSTER_CHECK_RESULTS'] }}" == "pong"          
+  
+  tasks:
+  - name: run check for the output if not rollback
+    ansible.builtin.shell: sudo cp /home/{{ansible_user}}/new_minikube_configs/client-deployment-4replicas.yml /home/{{ansible_user}}/current_minikube_configs/client-deployment-4replicas.yml 
+    
 
    
     
