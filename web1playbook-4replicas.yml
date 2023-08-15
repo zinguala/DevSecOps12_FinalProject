@@ -46,6 +46,10 @@
   - name: ip check
     ansible.builtin.shell: hostname -I | awk '{print $1}'
     register: ip
+
+  - name: save the ip for next tasks
+    set_fact: 
+      host__ip: ip.stdout
    
  
 - name: run check for the output if not rollback
@@ -57,7 +61,7 @@
     register: answer
 
   - debug:
-      msg: "{{ ip.stdout }} ip answer= {{ answer.stdout }}"
+      msg: "{{ host__ip }} ip answer= {{ answer.stdout }}"
    
     
    
