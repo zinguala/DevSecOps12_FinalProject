@@ -92,7 +92,7 @@
     ansible.builtin.shell: cp /home/{{ansible_user}}/new_minikube_configs/client-deployment-service.yml /home/{{ansible_user}}/current_minikube_configs/client-deployment-service.yml
     when:  hostvars['DUMMY_HOST2']['cluster_check'] == "pong"
 
-  - name: delete the previous deployment and service
+  - name: remove from minikube the previous deployment and service
     ansible.builtin.shell: minikube delete --all
     when:  hostvars['DUMMY_HOST2']['cluster_check'] != "pong"
     
