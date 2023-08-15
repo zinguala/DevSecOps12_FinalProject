@@ -31,10 +31,10 @@
       group: sudo
 
   - name: delete the previous deployment and service
-        ansible.builtin.shell: minikube delete --all
+    ansible.builtin.shell: minikube delete --all
 
   - name: start minikube
-        ansible.builtin.shell: minikube start
+    ansible.builtin.shell: minikube start
 
   - name: apply the 4 replicas deployment
     ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/new_minikube_configs/client-deployment-4replicas.yml
@@ -72,33 +72,48 @@
       msg: "ip answer= {{ answer.stdout }}"
 
 
-- name:  run check for the output if not rollback
+- name:  run check for the output if ok store the config as current
   hosts: web
   vars:
     asnible_python_interpreter: /usr/bin/python3
   become: true
   become_user: "{{ ansible_user }}" 
+  when:  hostvars['DUMMY_HOST2']['cluster_check'] == "pong"
   
   tasks:
   - name: if check is ok copy deployment config from new to current
     ansible.builtin.shell: cp /home/{{ansible_user}}/new_minikube_configs/client-deployment-4replicas.yml /home/{{ansible_user}}/current_minikube_configs/client-deployment-4replicas.yml 
-    when:  hostvars['DUMMY_HOST2']['cluster_check'] == "pong"
     
   - debug:
       msg: " answer = {{ hostvars['DUMMY_HOST2']['cluster_check'] }}"
 
   - name: if check is ok copy service config from new to current 
     ansible.builtin.shell: cp /home/{{ansible_user}}/new_minikube_configs/client-deployment-service.yml /home/{{ansible_user}}/current_minikube_configs/client-deployment-service.yml
-    when:  hostvars['DUMMY_HOST2']['cluster_check'] == "pong"
+    
+
+- name:  run check for the output if not rollback
+  hosts: web
+  vars:
+    asnible_python_interpreter: /usr/bin/python3
+  become: true
+  become_user: "{{ ansible_user }}" 
+  when:  hostvars['DUMMY_HOST2']['cluster_check'] != "pong"
+
+  tasks:
+  - name: delete the previous deployment and service
+    ansible.builtin.shell: minikube delete --all
+
+  - name: start minikube
+    ansible.builtin.shell: minikube start
   
 
   - name: if check is not ok - rollback to previous version - apply current deployment config 
     ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/current_minikube_configs/client-deployment-4replicas.yml
-    when:  hostvars['DUMMY_HOST2']['cluster_check'] != "pong"
+    
    
   - name: if check is not ok - rollback to previous version - apply current service config 
     ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/current_minikube_configs/client-deployment-service.yml
-    when:  hostvars['DUMMY_HOST2']['cluster_check'] != "pong"
+   
    
    
 
