@@ -57,7 +57,7 @@
   tasks:
   
   - name: run check for the output if not rollback
-    ansible.builtin.shell: sudo python3 /etc/minikube_configs/test.py "{{ hostvars['DUMMY_HOST']['CLUSTER_HOST__IP'] }}"
+    ansible.builtin.shell: sudo python3 /etc/minikube_configs/test.py {{ hostvars['DUMMY_HOST']['CLUSTER_HOST__IP'] }}
     register: answer
 
   - debug:
