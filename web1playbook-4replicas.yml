@@ -86,16 +86,25 @@
   become_user: "{{ ansible_user }}" 
   
   tasks:
-  - name: run check for the output if not rollback
+  - name: if check is ok copy deployment config from new to current
     ansible.builtin.shell: cp /home/{{ansible_user}}/new_minikube_configs/client-deployment-4replicas.yml /home/{{ansible_user}}/current_minikube_configs/client-deployment-4replicas.yml 
     when:  hostvars['DUMMY_HOST2']['cluster_check'] == "pong"
     
   - debug:
-      msg: " answer  = {{ hostvars['DUMMY_HOST2']['cluster_check'] }}"
-      
+      msg: " answer = {{ hostvars['DUMMY_HOST2']['cluster_check'] }}"
 
+  - name: if check is ok copy service config from new to current 
+    ansible.builtin.shell: cp /home/{{ansible_user}}/new_minikube_configs/client-deployment-service.yml /home/{{ansible_user}}/current_minikube_configs/client-deployment-service.yml
+    when:  hostvars['DUMMY_HOST2']['cluster_check'] == "pong"
+  
+
+  - name: if check is not ok - rollback to previous version - apply current deployment config 
+    ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/current_minikube_configs/client-deployment-4replicas.yml
+    when:  hostvars['DUMMY_HOST2']['cluster_check'] != "pong"
    
-    
+  - name: if check is not ok - rollback to previous version - apply current service config 
+    ansible.builtin.shell: kubectl apply -f /home/{{ansible_user}}/current_minikube_configs/client-deployment-service.yml
+    when:  hostvars['DUMMY_HOST2']['cluster_check'] != "pong"
    
    
 
