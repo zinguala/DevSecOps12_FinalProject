@@ -46,15 +46,18 @@
   - name: ip check
     ansible.builtin.shell: hostname -I | awk '{print $1}'
     register: ip
-
+    tasks:
  
-  - name: run check for the output if not rollback
-    hosts: localhost
-    ansible.builtin.shell: sudo python3 /etc/minikube_configs/test.py "{{ ip.stdout }}"
-    register: answer
+- name: run check for the output if not rollback
+  hosts: localhost
+   tasks:
+   
+    - name: run check for the output if not rollback
+      ansible.builtin.shell: sudo python3 /etc/minikube_configs/test.py 192.168.52.130
+      register: answer
 
-  - debug:
-      msg: "{{ ip.stdout }} answer= {{ answer.stdout }}"
+    - debug:
+        msg: " answer= {{ answer.stdout }}"
    
     
    
