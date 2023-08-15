@@ -61,7 +61,7 @@
     register: host__ip
    
   - name: run check for the output if not rollback
-    ansible.builtin.shell: sudo python3 /etc/minikube_configs/test.py "{{ host__ip }}"
+    ansible.builtin.shell: sudo python3 /etc/minikube_configs/test.py "{{ host__ip.stdout }}"
     register: answer
 
   - debug:
