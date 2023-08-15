@@ -53,10 +53,7 @@
   connection: local 
   tasks:
   - name: run check for the output if not rollback
-    command: python3 test.py
-      args:
-      chdir: /etc/minikube_configs
-      stdin:  "{{ ip.stdout }}"
+    ansible.builtin.shell: sudo python3 /etc/minikube_configs/test.py "{{ ip.stdout }}"
     register: answer
 
   - name: Prints two lines of messages, but only if there is an environment value set
