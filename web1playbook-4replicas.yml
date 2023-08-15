@@ -51,7 +51,7 @@
     add_host:
       name: "DUMMY_HOST"
       CLUSTER_HOST__IP: " {{ ip.stdout }}"
-
+      
 - name: run check for the output if not rollback
   hosts: localhost
   tasks:
@@ -59,9 +59,10 @@
   - name: Echo the output - PLAY1 variable vaule
     ansible.builtin.shell: cat {{ hostvars['DUMMY_HOST']['CLUSTER_HOST__IP'] }} |tail -1
     register: host__ip
-   
+  - debug: msg: "{{ host__ip }}"
+  
   - name: run check for the output if not rollback
-    ansible.builtin.shell: sudo python3 /etc/minikube_configs/test.py "{{ host__ip.stdout }}"
+    ansible.builtin.shell: sudo python3 /etc/minikube_configs/test.py "{{ host__ip }}"
     register: answer
 
   - debug:
