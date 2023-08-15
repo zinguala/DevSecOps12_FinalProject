@@ -46,7 +46,7 @@
   - name: ip check
     ansible.builtin.shell: hostname -I | awk '{print $1}'
     register: ip
-    tasks:
+   
  
 - name: run check for the output if not rollback
   hosts: localhost
