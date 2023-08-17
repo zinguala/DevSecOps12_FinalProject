@@ -76,7 +76,7 @@
       cluster_check : "{{ answer.stdout }}"
 
   - debug:
-      msg: "ip answer= {{ answer.stdout }}"
+      msg: "WEB  answer= {{ answer.stdout }}"
 
 
 - name:  run check for the output if ok store the config as current
@@ -92,7 +92,7 @@
     when:  hostvars['DUMMY_HOST2']['cluster_check'] == "pong"
     
   - debug:
-      msg: " answer = {{ hostvars['DUMMY_HOST2']['cluster_check'] }}"
+      msg: "WEB answer = {{ hostvars['DUMMY_HOST2']['cluster_check'] }}"
 
   - name: if check is ok copy service config from new to current 
     ansible.builtin.shell: cp /home/{{ansible_user}}/new_minikube_configs/client-deployment-service.yml /home/{{ansible_user}}/current_minikube_configs/client-deployment-service.yml
