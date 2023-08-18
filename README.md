@@ -9,7 +9,7 @@ USING ANSIBLE WE WILL BUILD A CRON JOB IN JENKINS TO ADD 2 REPLICAS AT 8:‎00 A
 
 # Here are the instructions to get it all working:  
 
-# Create Ubuntu Web machine that will run the minikube cluster:
+# Create FIRST Ubuntu Web machine that will run the minikube cluster:
 
 # 1) At first we will add the user for the Ansible ssh connection:
 
@@ -104,7 +104,7 @@ stream {
 
 
 
-# Create ubuntu Jenkins + ansible machine:
+# Create SECOND NEW ubuntu Jenkins + ansible machine:
 
 # 4) Install and config Ansible and jenkins:
    
