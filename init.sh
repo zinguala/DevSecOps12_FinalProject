@@ -47,7 +47,7 @@ select cpu in x86-64 arm64 armv7 ppc64 s390x; do
 	done
 sudo snap install kubectl --classic
 minkube start
-sudo apt install nginxs
+sudo apt install nginx
 sudo systemctl enable nginx.service
 origin="After=network.target nss-lookup.target"
 new="After=network-online.target nss-lookup.target"
