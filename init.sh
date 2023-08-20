@@ -32,7 +32,7 @@ select cpu in x86-64 arm64 armv7 ppc64 s390x; do
 			echo "ppc64"
 			curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-ppc64le
 			sudo install minikube-linux-ppc64le /usr/local/bin/minikube
-			/home/hai/Desktop/test/init.shbreak
+			break
 			;;
 		s390x)
 			echo "S390x"
