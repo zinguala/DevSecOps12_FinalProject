@@ -2,7 +2,6 @@
 sudo apt update
 sudo apt upgrade -y
 sudo apt-get install python3.6
-sudo apt install 
 sudo apt install openssh-server -y
 sudo apt install docker.io -y
 sudo usermod -aG docker $USER && newgrp docker
