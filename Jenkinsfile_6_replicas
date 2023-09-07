@@ -54,6 +54,13 @@ pipeline {
                 sh 'sudo cp client-deployment-service.yml /etc/minikube_configs/client-deployment-service.yml' 
             }
         }
+
+        stage('copy minikube test.py /etc/minikube_configs') {
+            steps {
+                sh 'sudo cp test.py /etc/minikube_configs/test.py' 
+            }
+        }
+
         stage('playbook copy minikube configs to web host and apply them') {
             steps {
                 sh 'sudo ansible-playbook /etc/ansible/playbooks/web1playbook-6replicas.yml -i /etc/ansible/inventory/inventory'
