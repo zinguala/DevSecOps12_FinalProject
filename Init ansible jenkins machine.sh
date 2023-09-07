@@ -14,8 +14,7 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
 sudo apt-get update
 sudo apt-get install jenkins -y
 sudo apt install git -y
-sudo apt install pipx -y
-pipx install --include-deps ansible
+sudo apt install ansible
 sudo apt install openssh-client
 sudo ssh-keygen -q -t rsa -N '' -f /root/.ssh/id_rsa <<<y >/dev/null 2>&1
 vm_ip=$(hostname -I | grep -Eo '^[^ ]+')
