@@ -20,20 +20,7 @@ after running Init ansible jenkins machine.sh only need to Add Jenkins permissio
 
 jenkins ALL=(ALL) NOPASSWD: ALL  
 
-- Create an inventory file called "inventory" in /etc/ansible/inventory directory: “sudo mkdir -p /etc/ansible/inventory”  
-the playbook will work only if the inventory will be called "inventory" will be in this path: /etc/ansible/inventory
-  
-- Creating the inventory: "nano /etc/ansible/inventory/inventory":
-  Make sure the minikube host will be under group "web" as shown below (the playbook is configured to run on group "web")
---------------------------------------------------
-[web]  
-hostname ansible_host=vm-ip ansible_user=username
-
-[vars:all]    
-ansible_ssh_private_key_file=/root/.ssh/id_rsa
-
---------------------------------------------------
-
+and set up the jenkins jobs as show below ( skip to step 6)  
 
 
 # option 2: run all the installations yourself:  
