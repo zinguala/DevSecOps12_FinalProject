@@ -1,6 +1,5 @@
 #!/bin/sh
 sudo apt update
-sudo apt upgrade -y
 sudo apt-get install python3.6
 sudo apt install openssh-server -y
 sudo apt install docker.io -y
@@ -47,7 +46,7 @@ select cpu in x86-64 arm64 armv7 ppc64 s390x; do
 	done
 sudo snap install kubectl --classic
 minkube start
-sudo apt install nginxs
+sudo apt install nginx
 sudo systemctl enable nginx.service
 origin="After=network.target nss-lookup.target"
 new="After=network-online.target nss-lookup.target"
@@ -60,7 +59,7 @@ vm_ip=$(hostname -I | grep -Eo '^[^ ]+')
 sudo chmod 777 /etc/nginx/nginx.conf
 sudo echo -e "\nstream {\n\tserver {\n\t\tlisten $vm_ip:5005;\n\t\t#TCP traffic will be forwarded to the specific server\n\t\tproxy_pass $kube_ip:30002;\n\t}\n}" >> /etc/nginx/nginx.conf
 sudo chmod 644 /etc/nginx/nginx.conf
-sudo systemctl restart nginx
+sudo systemctl daemon-reload
 sudo ufw allow 5005
 echo -e "DO NOT CLOSE THIS WINDOW\nwhen you prompt to do so on the jenkins mechine, you need to copy this IP:\n$vm_ip\nAnd this user name:\n$USER\n"
 read -rsn1 -p "After you've copy the IP above press any key to finish.";echo
