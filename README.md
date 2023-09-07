@@ -9,7 +9,7 @@ USING ANSIBLE WE WILL BUILD A CRON JOB IN JENKINS TO ADD 2 REPLICAS AT 8:‎00 A
 
 # Here are the instructions to get it all working: 
 # option 1: run the bash init scripts for web and ansible-jenkins at the Init_bash branch 
-it will install all of the packeges automatically.
+it will install all of the packeges automatically.  
 after running Init ansible jenkins machine.sh only need to Add Jenkins permission so we can run sudo without a password:  
    
 - sudo su  
