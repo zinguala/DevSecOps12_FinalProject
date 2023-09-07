@@ -1,6 +1,6 @@
 sudo apt-get update
 sudo apt install snap -y
-sudo snap install curl
+sudo apt install curl
 sudo apt-get install python3.6
 sudo apt install openssh-server -y
 sudo apt install docker.io -y
