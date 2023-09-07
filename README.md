@@ -7,7 +7,8 @@ WE WILL BUILD A CLUSTER IN MINIKUBE TO RUN 4 INSTANCES OF THIS CONTAINER
 THE INSTANCE WILL BE A DEPLOYMENT WITH A 4 REPLICAS  
 USING ANSIBLE WE WILL BUILD A CRON JOB IN JENKINS TO ADD 2 REPLICAS AT 8:‎00 AND DELETE 2 REPLICAS AT 13:00  
 
-# Here are the instructions to get it all working:  
+# Here are the instructions to get it all working: 
+# option 1: run the bash init scripts for web and ansible-jenkins  
 
 # Create FIRST Ubuntu Web machine that will run the minikube cluster:
 
