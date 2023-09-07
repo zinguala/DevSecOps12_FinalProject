@@ -8,7 +8,20 @@ THE INSTANCE WILL BE A DEPLOYMENT WITH A 4 REPLICAS
 USING ANSIBLE WE WILL BUILD A CRON JOB IN JENKINS TO ADD 2 REPLICAS AT 8:‎00 AND DELETE 2 REPLICAS AT 13:00  
 
 # Here are the instructions to get it all working: 
-# option 1: run the bash init scripts for web and ansible-jenkins  
+# option 1: run the bash init scripts for web and ansible-jenkins at the Init_bash branch 
+it will install all most of the requirements automatically.
+after running Init ansible jenkins machine.sh only need to Add Jenkins permission so we can run sudo without a password:  
+   
+- sudo su  
+  
+- visudo  
+  
+- then add this line to the file:  
+
+jenkins ALL=(ALL) NOPASSWD: ALL  
+
+
+# option 2: run all the installations yourself:  
 
 # Create FIRST Ubuntu Web machine that will run the minikube cluster:
 
