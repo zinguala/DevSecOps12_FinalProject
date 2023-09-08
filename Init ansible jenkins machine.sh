@@ -26,5 +26,5 @@ sudo ssh-copy-id -i /root/.ssh/id_rsa $web_user@$web_IP
 sudo mkdir -p /etc/ansible/inventory
 sudo touch /etc/ansible/inventory/inventory
 sudo chmod 777 /etc/ansible/inventory/inventory
-sudo echo -e "[web]\nhostname ansible_host=$vm-ip ansible_user=$USER\n\n[vars:all]\nansible_ssh_private_key_file=/root/.ssh/id_rsa" | cat >> /etc/ansible/inventory/inventory
+sudo echo -e "[web]\nhostname ansible_host=$web_IP-ip ansible_user=$web_user\n\n[vars:all]\nansible_ssh_private_key_file=/root/.ssh/id_rsa" | cat >> /etc/ansible/inventory/inventory
 sudo chmod 644 /etc/ansible/inventory/inventory
