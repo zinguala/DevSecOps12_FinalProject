@@ -11,8 +11,8 @@ select cpu in x86-64 arm64 armv7 ppc64 s390x; do
 	case $cpu in
 		x86-64)
 			echo "x86-64"
-			curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-			sudo install minikube-linux-amd64 /usr/local/bin/minikube
+			curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
+			sudo dpkg -i minikube_latest_amd64.deb
 			break
 			;;
 		arm64)
